@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Word2Vec Explorer</title>
+<meta name="description" content="Explore a Word2Vec model in your browser: nearest neighbors, analogies, and 2D/3D PCA maps of word vectors.">
+<meta name="theme-color" content="#0B2545">
+<script>
+  // Same theme preference as the landing page ('puente-theme': light | dark | system).
+  (function () {
+    var t = 'system';
+    try { var v = localStorage.getItem('puente-theme'); if (v === 'light' || v === 'dark' || v === 'system') t = v; } catch (e) {}
+    var dark = t === 'dark' || (t === 'system' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  })();
+</script>
+<style>
+/* Self-hosted fonts, copied from index.html (latin + latin-ext subsets) */
+/* latin-ext */
+@font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/font-0.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face { font-family: 'DM Serif Display'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/font-1.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* latin-ext */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/font-7.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url("/assets/fonts/font-8.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* latin-ext */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url("/assets/fonts/font-7.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url("/assets/fonts/font-8.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* latin-ext */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url("/assets/fonts/font-7.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url("/assets/fonts/font-8.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* latin-ext */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url("/assets/fonts/font-7.woff2") format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+/* latin */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url("/assets/fonts/font-8.woff2") format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+</style>
+<style>
+/* Design tokens copied from index.html */
+:root{--surface:#fff;--alt:#F3F5F8;--text:#0F1E33;--muted:#4F5A69;--border:rgba(11,37,69,.10);--input-border:rgba(11,37,69,.16);--tint:rgba(20,184,166,.14);--heading:#0B2545;--link:#0B6B74;--glass:rgba(255,255,255,.52);--glass-strong:rgba(255,255,255,.78);--glass-weak:rgba(255,255,255,.42);--glass-border:rgba(255,255,255,.75);--glass-shadow:0 10px 40px rgba(11,37,69,.10),inset 0 1px 0 rgba(255,255,255,.9);--base:#EAF1F6;--a1:rgba(20,184,166,.38);--a2:rgba(244,201,93,.42);--a3:rgba(232,99,74,.30);--a4:rgba(19,66,107,.28)}
+[data-theme=dark]{color-scheme:dark;--surface:#101D30;--alt:#0A1626;--text:#F3F5F8;--muted:#B4BDCA;--border:rgba(255,255,255,.10);--input-border:rgba(255,255,255,.16);--tint:rgba(20,184,166,.16);--heading:#F3F5F8;--link:#3CCFBC;--glass:rgba(20,36,60,.48);--glass-strong:rgba(16,30,52,.80);--glass-weak:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.13);--glass-shadow:0 10px 40px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.10);--base:#06101D;--a1:rgba(20,184,166,.30);--a2:rgba(244,201,93,.16);--a3:rgba(232,99,74,.20);--a4:rgba(37,99,235,.22)}
+:root{--navy:#0B2545;--navy2:#13426B;--teal:#0E7C86;--teal2:#14B8A6;--mint:#7DD3C0;--yellow:#F4C95D;--orange:#F59E5B;--coral:#E8634A;--pt-neighbor:#0E7C86;--pt-ext:#6B7685}
+[data-theme=dark]{--pt-neighbor:#14B8A6;--pt-ext:#8E99A8}
+input:not([type=range]):not([type=checkbox]){background-color:var(--glass-weak);color:var(--text)}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,sans-serif;color:var(--text);background:radial-gradient(ellipse 60% 45% at 8% 12%,var(--a1),transparent 70%),radial-gradient(ellipse 50% 40% at 92% 28%,var(--a2),transparent 70%),radial-gradient(ellipse 55% 45% at 85% 82%,var(--a3),transparent 70%),radial-gradient(ellipse 60% 50% at 12% 78%,var(--a4),transparent 70%),var(--base);background-color:var(--base);background-attachment:fixed;-webkit-font-smoothing:antialiased;transition:background-color .25s,color .25s;overflow-x:hidden}
+a{color:var(--link)}a:hover{color:var(--heading)}
+*:focus-visible{outline:2px solid #0E7C86;outline-offset:2px}
+*,*::before,*::after{box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* Header */
+.site-header{position:fixed;top:0;left:0;right:0;z-index:1000;height:72px;background:transparent;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid transparent;transition:background 300ms,height 300ms,border-color 300ms}
+.site-header.scrolled{background:rgba(11,37,69,.55);border-bottom-color:rgba(255,255,255,.14);height:64px}
+.site-header .inner{max-width:1440px;margin:0 auto;height:100%;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff;min-width:0}
+.brand:hover{color:#fff}
+.brand .wm{display:flex;flex-direction:column;line-height:1}
+.brand .wm1{font-family:'DM Serif Display',serif;font-size:25px;letter-spacing:-.01em;white-space:nowrap}
+.brand .wm2{font:600 9.5px Inter,sans-serif;letter-spacing:.32em;margin-top:3px;color:#F4C95D;white-space:nowrap}
+.back{color:#fff;text-decoration:none;font-weight:600;font-size:15px;height:42px;padding:0 16px;display:inline-flex;align-items:center;gap:8px;border:2px solid rgba(255,255,255,.85);border-radius:14px;white-space:nowrap;transition:background 150ms}
+.back:hover{color:#fff;background:rgba(255,255,255,.12)}
+@media (max-width:600px){.site-header{height:60px}.site-header .inner{padding:0 16px}.back{font-size:14px;height:40px;padding:0 12px}}
+
+/* Hero */
+.hero{background:linear-gradient(135deg, #0B2545 0%, #13426B 18%, #0E7C86 36%, #14B8A6 52%, #7DD3C0 64%, #F4C95D 78%, #F59E5B 89%, #E8634A 100%);padding:120px 24px 64px}
+.hero-card{max-width:1200px;margin:0 auto;background:rgba(11,37,69,.52);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 80px rgba(11,37,69,.35);border-radius:32px;padding:clamp(24px,4vw,48px);color:#fff}
+.badge{display:inline-block;background:#F4C95D;color:#0F1E33;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px}
+.hero h1{font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(40px,6.2vw,72px);line-height:1.05;margin:20px 0 16px;text-wrap:balance}
+.hero .sub{font-size:clamp(16px,1.6vw,19px);line-height:1.6;margin:0 0 28px;color:#F3F5F8;max-width:680px;text-wrap:pretty}
+.search{display:flex;gap:12px;flex-wrap:wrap;max-width:720px}
+.field{position:relative;flex:1 1 260px;min-width:0}
+.hero .field input{width:100%;height:56px;border-radius:14px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.94)!important;color:#0F1E33!important;font:500 18px Inter,sans-serif;padding:0 18px;outline:none}
+.hero .field input::placeholder{color:#6B7685}
+.hero .field input:focus{box-shadow:0 0 0 3px rgba(244,201,93,.7)}
+.btn{position:relative;background:#E8634A;color:#fff;text-decoration:none;font:600 18px Inter,sans-serif;padding:0 30px;height:56px;display:inline-flex;align-items:center;justify-content:center;border-radius:14px;border:0;cursor:pointer;transition:all 150ms ease-out;white-space:nowrap}
+.btn:hover:not(:disabled){background:#F59E5B;transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,99,74,.4)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.btn.sm{height:44px;font-size:15px;padding:0 18px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;align-items:center}
+.chips .lbl{font-size:13px;font-weight:500;color:rgba(255,255,255,.8);margin-right:4px}
+.chip{font:500 14px Inter,sans-serif;height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:background 150ms,transform 150ms}
+.chip:hover{background:rgba(255,255,255,.24);transform:translateY(-1px)}
+.chip.light{border-color:var(--input-border);background:var(--glass-weak);color:var(--text)}
+.chip.light:hover{background:var(--tint)}
+.status{margin-top:22px;font-size:14px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:22px}
+.progress{width:180px;height:6px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden}
+.progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#14B8A6,#F4C95D);transition:width 120ms}
+.dot{width:8px;height:8px;border-radius:50%;background:#7DD3C0;flex:none}
+
+/* Suggestion list */
+.suggest{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:50;margin:0;padding:6px;list-style:none;background:var(--glass-strong);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:14px;box-shadow:0 18px 40px rgba(11,37,69,.22);color:var(--text);max-height:320px;overflow:auto}
+.hero .suggest{background:rgba(255,255,255,.97);color:#0F1E33;border-color:rgba(255,255,255,.8)}
+.suggest li{padding:10px 12px;border-radius:10px;cursor:pointer;font-size:15px;display:flex;justify-content:space-between;gap:12px}
+.suggest li small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.hero .suggest li small{color:#4F5A69}
+.suggest li[aria-selected=true],.suggest li:hover{background:rgba(20,184,166,.16)}
+.suggest b{font-weight:700}
+
+/* Main */
+main{padding:clamp(40px,6vw,72px) 24px clamp(64px,8vw,100px)}
+.wrap{max-width:1200px;margin:0 auto}
+.grid{display:grid;gap:24px}
+.row1{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+.row2{grid-template-columns:minmax(0,7fr) minmax(0,5fr);margin-top:24px}
+@media (max-width:920px){.row1,.row2{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(20px,2.6vw,32px);box-shadow:var(--glass-shadow);min-width:0}
+.eyebrow{font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link)}
+.card h2,.sec-h{font-family:'DM Serif Display',serif;font-weight:400;color:var(--heading);line-height:1.2}
+.card h2{font-size:clamp(24px,2.6vw,30px);margin:6px 0 4px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.note{font-size:14px;line-height:1.55;color:var(--muted);margin:0}
+.q{color:#E8634A}
+
+/* Results list */
+.results{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-direction:column;gap:4px}
+.results button{width:100%;display:grid;grid-template-columns:28px minmax(0,1fr) minmax(60px,34%) 50px;align-items:center;gap:10px;padding:9px 10px;border:0;border-radius:12px;background:transparent;color:var(--text);font:inherit;text-align:left;cursor:pointer;transition:background 150ms}
+.results button:hover,.results button:focus-visible{background:var(--tint)}
+.rank{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;text-align:right}
+.word{font-weight:600;font-size:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar{height:8px;border-radius:99px;background:var(--border);overflow:hidden}
+.bar>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#0E7C86,#14B8A6,#F4C95D)}
+.score{font-size:14px;font-variant-numeric:tabular-nums;text-align:right;color:var(--muted);font-weight:500}
+.skeleton{height:38px;border-radius:12px;background:linear-gradient(90deg,var(--border),var(--glass-weak),var(--border));background-size:200% 100%;animation:sh 1.2s infinite linear}
+@keyframes sh{to{background-position:-200% 0}}
+.msg{border-radius:16px;padding:16px 18px;background:var(--glass-weak);border:1px solid var(--border);font-size:15px;line-height:1.55}
+.msg.err{border-color:rgba(232,99,74,.55);background:rgba(232,99,74,.10)}
+.msg .chips{margin-top:12px}
+
+/* Segmented toggle */
+.seg{display:inline-flex;border:1px solid var(--input-border);border-radius:12px;overflow:hidden;background:var(--glass-weak)}
+.seg button{font:500 13px Inter,sans-serif;border:0;background:transparent;color:var(--text);padding:0 12px;height:34px;cursor:pointer;white-space:nowrap}
+.seg button[aria-pressed=true]{background:#0B2545;color:#fff}
+[data-theme=dark] .seg button[aria-pressed=true]{background:#14B8A6;color:#06101D}
+
+/* Plots */
+.plot2d{width:100%;display:block;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.plot2d .pt{cursor:pointer}
+.plot2d text{font-family:Inter,sans-serif;paint-order:stroke;stroke:var(--base);stroke-width:3px;stroke-linejoin:round}
+.plotbox{position:relative;border-radius:18px;background:var(--glass-weak);border:1px solid var(--border);overflow:hidden}
+.c3d{display:block;width:100%;height:clamp(340px,52vw,520px);touch-action:none;cursor:grab}
+.c3d.dragging{cursor:grabbing}
+.c3d.hover{cursor:pointer}
+.tools{position:absolute;right:10px;bottom:10px;display:flex;gap:6px}
+.tool{font:600 13px Inter,sans-serif;height:34px;min-width:34px;padding:0 10px;border-radius:10px;border:1px solid var(--input-border);background:var(--glass-strong);color:var(--text);cursor:pointer}
+.tool:hover{background:var(--tint)}
+.hint{position:absolute;left:12px;bottom:12px;font-size:12px;color:var(--muted);pointer-events:none;max-width:55%}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.empty-plot{display:flex;align-items:center;justify-content:center;min-height:300px;color:var(--muted);font-size:14px;text-align:center;padding:20px}
+
+/* Analogy */
+.ana{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end}
+.ana label{font-size:12px;font-weight:600;color:var(--muted);display:block;margin:0 0 5px 2px;white-space:nowrap}
+.ana input{width:100%;height:44px;border-radius:12px;border:1px solid var(--input-border);font:500 15px Inter,sans-serif;padding:0 12px;outline:none}
+.ana input:focus{border-color:#0E7C86;box-shadow:0 0 0 3px rgba(14,124,134,.18)}
+.ana-eq{font-size:14px;color:var(--muted);margin:12px 0 0;line-height:1.5}
+.ana-eq code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:var(--tint);padding:2px 6px;border-radius:6px;color:var(--text)}
+.ana-res{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 10px;counter-reset:a}
+.ana-res button{width:100%;display:flex;justify-content:space-between;gap:8px;align-items:center;border:0;background:transparent;color:var(--text);font:inherit;padding:7px 10px;border-radius:10px;cursor:pointer;text-align:left}
+.ana-res button:hover{background:var(--tint)}
+.ana-res li:first-child button{background:rgba(232,99,74,.12)}
+.ana-res .w{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ana-res .s{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* Explainer */
+.explain{margin-top:clamp(64px,8vw,100px)}
+.sec-h{font-size:clamp(30px,3.6vw,40px);margin:10px 0 12px;text-align:center}
+.sec-sub{text-align:center;color:var(--muted);font-size:17px;line-height:1.6;max-width:680px;margin:0 auto 40px}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+.ex-grid .card{display:flex;flex-direction:column;gap:12px}
+.ex-grid h3{font-size:20px;font-weight:600;margin:0;color:var(--heading)}
+.ex-grid p{font-size:15.5px;line-height:1.65;color:var(--muted);margin:0}
+.ex-grid p strong{color:var(--text)}
+.num{width:44px;height:44px;border-radius:50%;background:#0B2545;color:#F4C95D;font-family:'DM Serif Display',serif;font-size:22px;display:flex;align-items:center;justify-content:center;flex:none}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--glass-weak);border:1px solid var(--border);border-radius:14px;padding:12px}
+.stat b{display:block;font-family:'DM Serif Display',serif;font-weight:400;font-size:24px;color:var(--heading);line-height:1.1;overflow-wrap:anywhere}
+.stat span{font-size:12px;color:var(--muted)}
+.params{display:flex;flex-wrap:wrap;gap:6px}
+.params span{font-size:12.5px;background:var(--tint);border-radius:999px;padding:5px 10px;color:var(--text)}
+.formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;background:var(--glass-weak);border:1px solid var(--border);border-radius:12px;padding:10px 12px;color:var(--text);overflow-x:auto}
+footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:600px){
+  .hero{padding:96px 16px 40px}
+  main{padding-left:16px;padding-right:16px}
+  .btn{width:100%}
+  .results button{grid-template-columns:22px minmax(0,1fr) minmax(48px,30%) 44px;gap:8px;padding:9px 6px}
+  .ana-res{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .hint{display:none}
+}
+</style>
+</head>
+<body>
+<header class="site-header" id="hdr">
+  <div class="inner">
+    <a href="/" class="brand" aria-label="Puente Capital home">
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true" style="flex:none"><defs><linearGradient id="pc-tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13426B"></stop><stop offset="1" stop-color="#0B2545"></stop></linearGradient><linearGradient id="pc-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4C95D"></stop><stop offset="1" stop-color="#E8634A"></stop></linearGradient><clipPath id="pc-hz"><rect x="0" y="0" width="40" height="27"></rect></clipPath></defs><rect width="40" height="40" rx="10" fill="url(#pc-tile)"></rect><rect x=".5" y=".5" width="39" height="39" rx="9.5" fill="none" stroke="#fff" stroke-opacity=".14"></rect><circle cx="20" cy="27" r="7.5" fill="url(#pc-sun)" clip-path="url(#pc-hz)"></circle><path d="M6.5 27 A13.5 13.5 0 0 1 33.5 27" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M4 27H36" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M10.5 27v6M29.5 27v6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M15 31.5h10" stroke="#7DD3C0" stroke-width="1.6" stroke-linecap="round" opacity=".9"></path></svg>
+      <span class="wm"><span class="wm1">Puente</span><span class="wm2">CAPITAL</span></span>
+    </a>
+    <a href="/" class="back"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Back to home</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-card">
+    <span class="badge">NLP class lab · Word embeddings</span>
+    <h1>Word2Vec Explorer</h1>
+    <p class="sub">Every word in this model is a point in 100-dimensional space. Words used in similar contexts end up close together. Type a word to find its nearest neighbors, try an analogy, and see the neighborhood in 2D and 3D.</p>
+    <form class="search" id="searchForm" autocomplete="off" role="search">
+      <div class="field">
+        <label for="q" class="sr-only">Word to explore</label>
+        <input id="q" type="text" placeholder="Type a word, e.g. king" spellcheck="false" autocapitalize="none" autocorrect="off" disabled
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="q-list">
+        <ul class="suggest" id="q-list" role="listbox" hidden></ul>
+      </div>
+      <button class="btn" type="submit" id="go" disabled>Explore</button>
+    </form>
+    <div class="chips" id="examples"><span class="lbl">Try:</span></div>
+    <div class="status" id="status" aria-live="polite"><span>Loading model…</span><span class="progress"><i id="prog"></i></span><span id="progTxt"></span></div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="grid row1">
+      <section class="card" id="resultsCard" aria-labelledby="resH">
+        <div class="eyebrow">Nearest neighbors</div>
+        <h2 id="resH">Closest words</h2>
+        <p class="note" id="resNote">Ranked by cosine similarity (1.0 = same direction). Click any word to explore it.</p>
+        <div id="results" aria-live="polite">
+          <ul class="results" aria-hidden="true">
+            <li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li><li class="skeleton"></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="mapH">
+        <div class="card-head">
+          <div><div class="eyebrow">2D map · PCA</div><h2 id="mapH">The neighborhood, flattened</h2></div>
+          <div class="seg" role="group" aria-label="Points to show"><button type="button" data-ext="0" aria-pressed="true">10 neighbors</button><button type="button" data-ext="1" aria-pressed="false">+ their neighbors</button></div>
+        </div>
+        <div class="plotbox" id="box2d"><div class="empty-plot" id="empty2d">The map appears once the model has loaded.</div></div>
+        <div class="legend"><span><i style="background:#E8634A"></i>query word</span><span><i style="background:var(--pt-neighbor)"></i>top 10 neighbors</span><span id="lgExt" hidden><i style="background:var(--pt-ext)"></i>neighbors of neighbors</span><span id="var2d"></span></div>
+      </section>
+    </div>
+
+    <div class="grid row2">
+      <section class="card" aria-labelledby="h3d">
+        <div class="card-head">
+          <div><div class="eyebrow">3D view · PCA</div><h2 id="h3d">Spin the neighborhood</h2></div>
+          <div class="seg" role="group" aria-label="Points to show"><button type="button" data-ext="0" aria-pressed="true">10 neighbors</button><button type="button" data-ext="1" aria-pressed="false">+ their neighbors</button></div>
+        </div>
+        <div class="plotbox">
+          <canvas class="c3d" id="c3d" role="img" aria-label="Interactive 3D scatter plot of the query word and its neighbors"></canvas>
+          <div class="hint" id="hint3d">Drag to rotate · scroll or pinch to zoom · click a word</div>
+          <div class="tools">
+            <button class="tool" type="button" id="spin" aria-pressed="true" title="Toggle auto-rotate">Pause</button>
+            <button class="tool" type="button" id="zin" aria-label="Zoom in">+</button>
+            <button class="tool" type="button" id="zout" aria-label="Zoom out">−</button>
+            <button class="tool" type="button" id="reset" title="Reset view">Reset</button>
+          </div>
+        </div>
+        <div class="legend"><span><i style="background:#E8634A"></i>query word</span><span><i style="background:var(--pt-neighbor)"></i>top 10 neighbors</span><span id="var3d"></span></div>
+      </section>
+
+      <section class="card" aria-labelledby="anaH">
+        <div class="eyebrow">Bonus · Vector arithmetic</div>
+        <h2 id="anaH">Analogies</h2>
+        <p class="note" style="margin-bottom:14px"><b>A</b> is to <b>B</b> as <b>C</b> is to <b>?</b></p>
+        <form id="anaForm" autocomplete="off">
+          <div class="ana">
+            <div class="field"><label for="aA">A</label><input id="aA" placeholder="man" spellcheck="false" autocapitalize="none" disabled role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="aA-list"><ul class="suggest" id="aA-list" role="listbox" hidden></ul></div>
+            <div class="field"><label for="aB">is to B</label><input id="aB" placeholder="king" spellcheck="false" autocapitalize="none" disabled role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="aB-list"><ul class="suggest" id="aB-list" role="listbox" hidden></ul></div>
+            <div class="field"><label for="aC">as C is to ?</label><input id="aC" placeholder="woman" spellcheck="false" autocapitalize="none" disabled role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="aC-list"><ul class="suggest" id="aC-list" role="listbox" hidden></ul></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:12px">
+            <button class="btn sm" type="submit" id="anaGo" disabled>Solve</button>
+            <div class="chips" id="anaPresets" style="margin:0"></div>
+          </div>
+        </form>
+        <p class="ana-eq">We compute <code>B − A + C</code> and list the words closest to that point (excluding A, B and C).</p>
+        <div id="anaOut" aria-live="polite"></div>
+      </section>
+    </div>
+
+    <section class="explain" aria-labelledby="exH">
+      <div class="eyebrow" style="text-align:center">How it works</div>
+      <h2 class="sec-h" id="exH">What am I looking at?</h2>
+      <p class="sec-sub">A short guide to the ideas behind this page, in plain language.</p>
+      <div class="ex-grid">
+        <div class="card">
+          <div class="num">1</div>
+          <h3>What is Word2Vec?</h3>
+          <p>Word2Vec is a small neural network that learns a list of numbers (a <strong>vector</strong>) for every word. It reads lots of text and practices one simple game: given a word, guess the words around it. To win, words that show up in similar contexts (like <em>coffee</em> and <em>tea</em>) need similar vectors.</p>
+          <p>Nobody tells it what words mean. Meaning emerges from usage: "you shall know a word by the company it keeps."</p>
+        </div>
+        <div class="card">
+          <div class="num">2</div>
+          <h3>How this model was trained</h3>
+          <p id="trainText">Details load with the model.</p>
+          <div class="stats" id="stats"></div>
+          <div class="params" id="params"></div>
+        </div>
+        <div class="card">
+          <div class="num">3</div>
+          <h3>Cosine similarity</h3>
+          <p>To compare two words we measure the <strong>angle</strong> between their vectors. Pointing the same way gives 1.0, unrelated is near 0, and opposite is −1. Length is ignored, so a rare word and a common word can still match.</p>
+          <div class="formula">cos(a, b) = (a · b) / (‖a‖ ‖b‖)</div>
+          <p>High similarity means "used in similar contexts". That includes synonyms, but also opposites (<em>hot</em> and <em>cold</em> appear in the same kinds of sentences).</p>
+        </div>
+        <div class="card">
+          <div class="num">4</div>
+          <h3>Why the maps are approximate</h3>
+          <p>Screens are 2D, but each word lives in <strong id="dimTxt">100</strong> dimensions. We use <strong>PCA</strong> (principal component analysis) to find the 2 or 3 directions along which the shown words differ most, and flatten everything onto them.</p>
+          <p>That is a <strong>lossy</strong> projection: two words can look close on the map but be far apart in the full space. Trust the similarity scores in the list; use the maps for intuition. The legend shows how much of the variation each view keeps.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>Word2Vec Explorer · a teaching demo · <a href="/">Puente Capital home</a></footer>
+
+<script>
+(function () {
+  'use strict';
+  var BASE = '/assets/w2v/';
+  var EXAMPLES = ['king', 'france', 'money', 'computer', 'war', 'water', 'music', 'doctor'];
+  var PRESETS = [['man', 'king', 'woman'], ['france', 'paris', 'japan'], ['good', 'better', 'bad'], ['man', 'woman', 'king']];
+  var K = 10, K2 = 5;
+
+  var M = { meta: null, vocab: null, lc: null, index: null, V: null, N: 0, D: 0, ok: null };
+  var S = { word: null, idx: -1, nbrs: [], ext: false, cache: {} };
+
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, kids) {
+    var e = document.createElement(tag);
+    if (attrs) for (var k in attrs) { if (k === 'text') e.textContent = attrs[k]; else if (k === 'class') e.className = attrs[k]; else e.setAttribute(k, attrs[k]); }
+    (kids || []).forEach(function (c) { if (c != null) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
+    return e;
+  }
+  function fmt(n) { return typeof n === 'number' ? n.toLocaleString('en-US') : String(n); }
+  function fmtBig(n) {
+    if (typeof n !== 'number') return String(n);
+    if (n >= 1e9) return (n / 1e9).toFixed(n >= 1e10 ? 0 : 1).replace(/\.0$/, '') + 'B';
+    if (n >= 1e6) return (n / 1e6).toFixed(n >= 1e7 ? 0 : 1).replace(/\.0$/, '') + 'M';
+    if (n >= 1e4) return Math.round(n / 1e3) + 'K';
+    return fmt(n);
+  }
+  function ordinal(n) { var s = ['th', 'st', 'nd', 'rd'], v = n % 100; return fmt(n) + (s[(v - 20) % 10] || s[v] || s[0]); }
+
+  /* ---------- header scroll state ---------- */
+  var hdr = $('hdr');
+  function onScroll() { hdr.classList.toggle('scrolled', window.scrollY > 24); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- loading ---------- */
+  function setProgress(p, txt) {
+    $('prog').style.width = Math.round(p * 100) + '%';
+    $('progTxt').textContent = txt || '';
+  }
+  function fetchJSON(url, opts) {
+    return fetch(url, opts).then(function (r) {
+      if (!r.ok) throw new Error(url + ' returned HTTP ' + r.status);
+      return r.json();
+    });
+  }
+  function fetchBin(url, onProg) {
+    return fetch(url).then(function (r) {
+      if (!r.ok) throw new Error(url + ' returned HTTP ' + r.status);
+      var total = +r.headers.get('content-length') || 0;
+      if (!r.body || !r.body.getReader || !total) return r.arrayBuffer();
+      var reader = r.body.getReader(), chunks = [], got = 0;
+      function pump() {
+        return reader.read().then(function (res) {
+          if (res.done) {
+            var out = new Uint8Array(got), o = 0;
+            chunks.forEach(function (c) { out.set(c, o); o += c.length; });
+            return out.buffer;
+          }
+          chunks.push(res.value); got += res.value.length;
+          onProg(Math.min(got / total, 0.99), got);
+          return pump();
+        });
+      }
+      return pump();
+    });
+  }
+
+  function load() {
+    var st = $('status');
+    st.innerHTML = '';
+    st.appendChild(el('span', { text: 'Loading model…' }));
+    var pr = el('span', { class: 'progress' }); pr.appendChild(el('i', { id: 'prog' })); st.appendChild(pr);
+    st.appendChild(el('span', { id: 'progTxt' }));
+    $('results').innerHTML = '<ul class="results" aria-hidden="true">' + new Array(7).join('<li class="skeleton"></li>') + '</ul>';
+
+    // meta.json is revalidated every time; its "trained" stamp versions the big files
+    // so a retrained model is not stuck behind long-lived /assets/* caching.
+    fetchJSON(BASE + 'meta.json', { cache: 'no-cache' }).then(function (meta) {
+      M.meta = meta;
+      var v = '?v=' + encodeURIComponent(meta.trained || meta.count || '1');
+      setProgress(0.02, 'fetching vectors');
+      return Promise.all([
+        fetchJSON(BASE + 'vocab.json' + v),
+        fetchBin(BASE + 'vectors.bin' + v, function (p, got) { setProgress(0.02 + p * 0.9, (got / 1048576).toFixed(1) + ' MB'); })
+      ]);
+    }).then(function (res) {
+      setProgress(0.95, 'decoding');
+      return new Promise(function (ok) { setTimeout(function () { ok(res); }, 0); });
+    }).then(function (res) {
+      decode(res[0], res[1]);
+      ready();
+    }).catch(function (err) {
+      console.warn('Word2Vec model failed to load:', err);
+      showLoadError(err);
+    });
+  }
+
+  function decode(vocab, buf) {
+    var meta = M.meta, D = meta.dim | 0;
+    if (!Array.isArray(vocab) || !vocab.length) throw new Error('vocab.json is not a list of words');
+    if (!D) throw new Error('meta.json has no "dim"');
+    var rowsInBin = Math.floor(buf.byteLength / D);
+    var N = Math.min(vocab.length, rowsInBin, meta.count || Infinity);
+    if (!N) throw new Error('vectors.bin is empty');
+    if (N !== vocab.length || N * D !== buf.byteLength) console.warn('Model size mismatch: vocab', vocab.length, 'rows', rowsInBin, 'meta.count', meta.count, '- using', N);
+    var q = new Int8Array(buf, 0, N * D), V = new Float32Array(N * D), ok = new Uint8Array(N);
+    for (var i = 0; i < N; i++) {
+      var o = i * D, s = 0;
+      for (var j = 0; j < D; j++) { var x = q[o + j]; V[o + j] = x; s += x * x; }
+      if (s > 0) { ok[i] = 1; var inv = 1 / Math.sqrt(s); for (j = 0; j < D; j++) V[o + j] *= inv; }
+    }
+    var lc = new Array(N), index = new Map();
+    for (i = 0; i < N; i++) {
+      var w = String(vocab[i]); lc[i] = w.toLowerCase();
+      if (ok[i] && !index.has(lc[i])) index.set(lc[i], i);
+    }
+    M.vocab = vocab.slice(0, N); M.lc = lc; M.index = index; M.V = V; M.N = N; M.D = D; M.ok = ok;
+  }
+
+  function showLoadError(err) {
+    var st = $('status'); st.innerHTML = '';
+    st.appendChild(el('span', { class: 'dot', style: 'background:#E8634A' }));
+    st.appendChild(el('span', { text: 'The model could not be loaded.' }));
+    var box = el('div', { class: 'msg err', role: 'alert' }, [
+      el('strong', { text: 'Couldn’t load the Word2Vec model.' }),
+      el('div', { style: 'margin-top:6px;color:var(--muted);font-size:14px', text: (err && err.message ? err.message : String(err)) + '. Check your connection and try again.' })
+    ]);
+    var retry = el('button', { class: 'btn sm', type: 'button', style: 'margin-top:12px', text: 'Try again' });
+    retry.addEventListener('click', load);
+    box.appendChild(retry);
+    $('results').innerHTML = ''; $('results').appendChild(box);
+    $('empty2d').textContent = 'No model loaded.';
+  }
+
+  function ready() {
+    var meta = M.meta;
+    var st = $('status'); st.innerHTML = '';
+    st.appendChild(el('span', { class: 'dot' }));
+    st.appendChild(el('span', { text: fmt(M.N) + ' words · ' + M.D + ' dimensions' + (meta.corpus ? ' · trained on ' + meta.corpus : '') }));
+    ['q', 'go', 'aA', 'aB', 'aC', 'anaGo'].forEach(function (id) { $(id).disabled = false; });
+
+    var ex = $('examples');
+    EXAMPLES.filter(function (w) { return M.index.has(w); }).slice(0, 8).forEach(function (w) {
+      var b = el('button', { class: 'chip', type: 'button', text: w });
+      b.addEventListener('click', function () { $('q').value = w; query(w, { scroll: true }); });
+      ex.appendChild(b);
+    });
+    var ap = $('anaPresets');
+    PRESETS.filter(function (p) { return p.every(function (w) { return M.index.has(w); }); }).slice(0, 3).forEach(function (p) {
+      var b = el('button', { class: 'chip light', type: 'button', text: p[0] + ' : ' + p[1] + ' :: ' + p[2] + ' : ?', style: 'height:32px;font-size:13px' });
+      b.addEventListener('click', function () { $('aA').value = p[0]; $('aB').value = p[1]; $('aC').value = p[2]; solveAnalogy(); });
+      ap.appendChild(b);
+    });
+    fillExplainer();
+
+    var start = null, m = /[#&]w=([^&]+)/.exec(location.hash);
+    if (m) { try { start = decodeURIComponent(m[1]); } catch (e) {} }
+    if (!start) start = EXAMPLES.filter(function (w) { return M.index.has(w); })[0] || M.vocab[Math.min(100, M.N - 1)];
+    $('q').value = start;
+    query(start, { initial: true });
+
+    var p = PRESETS.filter(function (p) { return p.every(function (w) { return M.index.has(w); }); })[0];
+    if (p) { $('aA').value = p[0]; $('aB').value = p[1]; $('aC').value = p[2]; solveAnalogy(); }
+  }
+
+  /* ---------- math ---------- */
+  function row(i) { return M.V.subarray(i * M.D, (i + 1) * M.D); }
+  function topK(qv, k, exclude) {
+    var V = M.V, D = M.D, N = M.N, ok = M.ok, best = [], min = -Infinity;
+    for (var i = 0; i < N; i++) {
+      if (!ok[i] || (exclude && exclude.has(i))) continue;
+      var o = i * D, s = 0;
+      for (var j = 0; j < D; j++) s += V[o + j] * qv[j];
+      if (best.length < k || s > min) {
+        var p = best.length;
+        while (p > 0 && best[p - 1].s < s) p--;
+        best.splice(p, 0, { i: i, s: s });
+        if (best.length > k) best.pop();
+        if (best.length === k) min = best[k - 1].s;
+      }
+    }
+    return best;
+  }
+  function neighborsOf(i, k) {
+    var key = i + ':' + k;
+    if (!S.cache[key]) S.cache[key] = topK(row(i), k, new Set([i]));
+    return S.cache[key];
+  }
+  function lookup(w) { w = String(w || '').trim().toLowerCase(); return M.index.has(w) ? M.index.get(w) : -1; }
+
+  // Seeded PRNG so PCA starts (and therefore orientations) are reproducible.
+  function rng(seed) { return function () { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296 - 0.5; }; }
+
+  // PCA via power iteration with deflation on the D x D covariance of the selected vectors.
+  function pca(idxs, nc) {
+    var D = M.D, n = idxs.length, mean = new Float64Array(D), X = new Float64Array(n * D), a, j, r, c;
+    for (a = 0; a < n; a++) { var v = row(idxs[a]); for (j = 0; j < D; j++) mean[j] += v[j] / n; }
+    for (a = 0; a < n; a++) { v = row(idxs[a]); for (j = 0; j < D; j++) X[a * D + j] = v[j] - mean[j]; }
+    var C = new Float64Array(D * D);
+    for (a = 0; a < n; a++) {
+      var o = a * D;
+      for (r = 0; r < D; r++) { var xr = X[o + r]; if (!xr) continue; for (c = r; c < D; c++) C[r * D + c] += xr * X[o + c]; }
+    }
+    for (r = 0; r < D; r++) for (c = 0; c < r; c++) C[r * D + c] = C[c * D + r];
+    var trace = 0; for (r = 0; r < D; r++) trace += C[r * D + r];
+    var rand = rng(12345), comps = [], lams = [];
+    for (var k = 0; k < nc; k++) {
+      var b = new Float64Array(D); for (j = 0; j < D; j++) b[j] = rand();
+      var lam = 0;
+      for (var it = 0; it < 300; it++) {
+        var w = new Float64Array(D);
+        for (r = 0; r < D; r++) { var s = 0, ro = r * D; for (c = 0; c < D; c++) s += C[ro + c] * b[c]; w[r] = s; }
+        var nrm = 0; for (j = 0; j < D; j++) nrm += w[j] * w[j]; nrm = Math.sqrt(nrm);
+        if (nrm < 1e-12) { b = w; lam = 0; break; }
+        var diff = 0; for (j = 0; j < D; j++) { w[j] /= nrm; diff += Math.abs(w[j] - b[j]); }
+        b = w; lam = nrm;
+        if (diff < 1e-9) break;
+      }
+      // Deterministic sign: largest-magnitude loading is positive.
+      var mi = 0; for (j = 1; j < D; j++) if (Math.abs(b[j]) > Math.abs(b[mi])) mi = j;
+      if (b[mi] < 0) for (j = 0; j < D; j++) b[j] = -b[j];
+      comps.push(b); lams.push(lam);
+      for (r = 0; r < D; r++) for (c = 0; c < D; c++) C[r * D + c] -= lam * b[r] * b[c];
+    }
+    var coords = [];
+    for (a = 0; a < n; a++) {
+      var p = [];
+      for (k = 0; k < nc; k++) { var s2 = 0; for (j = 0; j < D; j++) s2 += X[a * D + j] * comps[k][j]; p.push(s2); }
+      coords.push(p);
+    }
+    return { coords: coords, explained: lams.map(function (l) { return trace > 0 ? l / trace : 0; }) };
+  }
+
+  /* ---------- query ---------- */
+  function query(raw, opts) {
+    opts = opts || {};
+    var w = String(raw || '').trim();
+    if (!w || !M.V) return;
+    hideAllSuggest();
+    var i = lookup(w);
+    if (i < 0) { showOOV(w); return; }
+    S.word = M.vocab[i]; S.idx = i;
+    S.nbrs = neighborsOf(i, K);
+    renderResults();
+    computeCloud();
+    try { history.replaceState(null, '', '#w=' + encodeURIComponent(S.word)); } catch (e) {}
+    if (opts.scroll) {
+      var card = $('resultsCard'), top = card.getBoundingClientRect().top;
+      if (top > window.innerHeight * 0.55 || top < 0) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function renderResults() {
+    var box = $('results'); box.innerHTML = '';
+    $('resH').innerHTML = '';
+    $('resH').appendChild(document.createTextNode('Closest to '));
+    $('resH').appendChild(el('span', { class: 'q', text: '“' + S.word + '”' }));
+    $('resNote').textContent = '“' + S.word + '” is the ' + ordinal(S.idx + 1) + ' most frequent word in the vocabulary. Scores are cosine similarity (1.0 = same direction). Click a word to explore it.';
+    var ol = el('ol', { class: 'results' });
+    S.nbrs.forEach(function (n, r) {
+      var b = el('button', { type: 'button', 'aria-label': M.vocab[n.i] + ', similarity ' + n.s.toFixed(3) }, [
+        el('span', { class: 'rank', text: String(r + 1) }),
+        el('span', { class: 'word', text: M.vocab[n.i] }),
+        el('span', { class: 'bar' }, [el('i', { style: 'width:' + Math.max(2, Math.min(100, n.s * 100)).toFixed(1) + '%' })]),
+        el('span', { class: 'score', text: n.s.toFixed(3) })
+      ]);
+      b.addEventListener('click', function () { $('q').value = M.vocab[n.i]; query(M.vocab[n.i]); });
+      ol.appendChild(el('li', null, [b]));
+    });
+    box.appendChild(ol);
+  }
+
+  function lev(a, b, max) {
+    if (Math.abs(a.length - b.length) > max) return max + 1;
+    var prev = new Array(b.length + 1), cur = new Array(b.length + 1), i, j;
+    for (j = 0; j <= b.length; j++) prev[j] = j;
+    for (i = 1; i <= a.length; i++) {
+      cur[0] = i; var lo = cur[0];
+      for (j = 1; j <= b.length; j++) {
+        cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+        if (cur[j] < lo) lo = cur[j];
+      }
+      if (lo > max) return max + 1;
+      var t = prev; prev = cur; cur = t;
+    }
+    return prev[b.length];
+  }
+  function closeSpellings(w, n) {
+    w = w.toLowerCase(); var out = [], seen = new Set(), lc = M.lc, i;
+    for (var len = Math.min(w.length, 4); len >= 2 && out.length < n; len--) {
+      var pre = w.slice(0, len);
+      for (i = 0; i < M.N && out.length < n; i++) if (M.ok[i] && lc[i].lastIndexOf(pre, 0) === 0 && !seen.has(lc[i])) { seen.add(lc[i]); out.push(M.vocab[i]); }
+      if (out.length >= 3) break;
+    }
+    if (out.length < n && w.length > 2) {
+      var lim = Math.min(M.N, 60000), cands = [];
+      for (i = 0; i < lim; i++) { if (!M.ok[i] || seen.has(lc[i])) continue; var d = lev(w, lc[i], 2); if (d <= 2) cands.push({ i: i, d: d }); }
+      cands.sort(function (a, b) { return a.d - b.d || a.i - b.i; });
+      cands.slice(0, n - out.length).forEach(function (c) { out.push(M.vocab[c.i]); });
+    }
+    return out;
+  }
+
+  function showOOV(w) {
+    var box = $('results'); box.innerHTML = '';
+    var sugg = closeSpellings(w, 6);
+    var msg = el('div', { class: 'msg', role: 'status' }, [
+      el('strong', { text: '“' + w + '” isn’t in this model’s vocabulary.' }),
+      el('div', { style: 'margin-top:6px;color:var(--muted);font-size:14px', text: 'The model only knows the ' + fmt(M.N) + ' words that appeared often enough in its training text' + (M.meta.params && M.meta.params.min_count ? ' (at least ' + M.meta.params.min_count + ' times)' : '') + '.' + (sugg.length ? ' Did you mean:' : ' Try a more common word.') })
+    ]);
+    if (sugg.length) {
+      var ch = el('div', { class: 'chips' });
+      sugg.forEach(function (s) { var b = el('button', { class: 'chip light', type: 'button', text: s }); b.addEventListener('click', function () { $('q').value = s; query(s); }); ch.appendChild(b); });
+      msg.appendChild(ch);
+    }
+    box.appendChild(msg);
+    $('resultsCard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  /* ---------- point cloud (shared by 2D + 3D) ---------- */
+  var cloud = null;
+  function computeCloud() {
+    if (S.idx < 0) return;
+    var pts = [{ i: S.idx, t: 0, parent: -1 }], seen = new Set([S.idx]);
+    S.nbrs.forEach(function (n) { seen.add(n.i); pts.push({ i: n.i, t: 1, parent: 0, s: n.s }); });
+    if (S.ext) {
+      S.nbrs.forEach(function (n, r) {
+        neighborsOf(n.i, K2).forEach(function (m) { if (!seen.has(m.i)) { seen.add(m.i); pts.push({ i: m.i, t: 2, parent: r + 1, s: m.s }); } });
+      });
+    }
+    var res = pca(pts.map(function (p) { return p.i; }), 3);
+    pts.forEach(function (p, k) { p.c = res.coords[k]; p.label = M.vocab[p.i]; });
+    cloud = { pts: pts, ex: res.explained };
+    var e = res.explained;
+    $('var2d').textContent = 'PC1+PC2 keep ' + Math.round((e[0] + e[1]) * 100) + '% of the variation';
+    $('var3d').textContent = 'PC1–3 keep ' + Math.round((e[0] + e[1] + e[2]) * 100) + '% of the variation';
+    $('lgExt').hidden = !S.ext;
+    draw2d();
+    view3d.setPoints(pts);
+  }
+
+  document.querySelectorAll('.seg button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      S.ext = b.getAttribute('data-ext') === '1';
+      document.querySelectorAll('.seg button').forEach(function (o) { o.setAttribute('aria-pressed', String((o.getAttribute('data-ext') === '1') === S.ext)); });
+      computeCloud();
+    });
+  });
+
+  /* ---------- 2D SVG ---------- */
+  var NS = 'http://www.w3.org/2000/svg';
+  function sv(tag, attrs) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function draw2d() {
+    if (!cloud) return;
+    var box = $('box2d'), W = Math.max(280, box.clientWidth), H = Math.round(Math.max(320, Math.min(520, W * 0.72)));
+    var narrow = W < 480, pad = narrow ? 26 : 40;
+    var pts = cloud.pts, xs = pts.map(function (p) { return p.c[0]; }), ys = pts.map(function (p) { return p.c[1]; });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    var labelRoom = narrow ? 50 : 70; // keep room for labels to the right
+    var sc = Math.min((W - 2 * pad - labelRoom) / ((x1 - x0) || 1), (H - 2 * pad) / ((y1 - y0) || 1));
+    var ox = pad + ((W - 2 * pad - labelRoom) - (x1 - x0) * sc) / 2, oy = pad + ((H - 2 * pad) - (y1 - y0) * sc) / 2;
+    function X(p) { return ox + (p.c[0] - x0) * sc; }
+    function Y(p) { return oy + (y1 - p.c[1]) * sc; }
+
+    var svg = sv('svg', { class: 'plot2d', viewBox: '0 0 ' + W + ' ' + H, width: W, height: H, role: 'img', 'aria-label': '2D PCA map of “' + S.word + '” and its nearest neighbors' });
+    var g = sv('g', {});
+    // faint crosshair axes
+    var cx = ox + (0 - x0) * sc, cy = oy + (y1 - 0) * sc;
+    g.appendChild(sv('line', { x1: 8, y1: cy, x2: W - 8, y2: cy, stroke: 'var(--border)', 'stroke-width': 1 }));
+    g.appendChild(sv('line', { x1: cx, y1: 8, x2: cx, y2: H - 8, stroke: 'var(--border)', 'stroke-width': 1 }));
+    var t1 = sv('text', { x: W - 10, y: cy - 6, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }); t1.textContent = 'PC1'; g.appendChild(t1);
+    var t2 = sv('text', { x: cx + 6, y: 18, 'font-size': 11, fill: 'var(--muted)' }); t2.textContent = 'PC2'; g.appendChild(t2);
+    svg.appendChild(g);
+
+    var lines = sv('g', {});
+    pts.forEach(function (p) {
+      if (p.t === 0) return;
+      var par = pts[p.parent];
+      lines.appendChild(sv('line', { x1: X(par), y1: Y(par), x2: X(p), y2: Y(p), stroke: p.t === 1 ? 'var(--pt-neighbor)' : 'var(--pt-ext)', 'stroke-opacity': p.t === 1 ? 0.45 : 0.22, 'stroke-width': p.t === 1 ? 1.5 : 1 }));
+    });
+    svg.appendChild(lines);
+
+    // label layout with simple collision relaxation
+    var fsz = [narrow ? 15 : 16, narrow ? 12.5 : 13.5, narrow ? 10.5 : 11.5], rad = [9, 6, 3.5];
+    var labs = pts.map(function (p) {
+      var fs = fsz[p.t], w = p.label.length * fs * 0.58 + 2, x = X(p) + rad[p.t] + 5, anchor = 'start';
+      if (x + w > W - 4) { x = X(p) - rad[p.t] - 5 - w; }
+      return { p: p, x: x, y: Y(p) + fs * 0.35, w: w, h: fs * 1.15, fs: fs, ay: Y(p) + fs * 0.35 };
+    });
+    for (var it = 0; it < 80; it++) {
+      var moved = false;
+      for (var a = 0; a < labs.length; a++) for (var b = a + 1; b < labs.length; b++) {
+        var A = labs[a], B = labs[b];
+        if (A.x < B.x + B.w && B.x < A.x + A.w && Math.abs(A.y - B.y) < (A.h + B.h) / 2) {
+          var ov = (A.h + B.h) / 2 - Math.abs(A.y - B.y) + 0.5, dir = A.y <= B.y ? -1 : 1;
+          var wa = A.p.t === 0 ? 0.15 : 0.5, wb = B.p.t === 0 ? 0.15 : 0.5;
+          A.y += dir * ov * wa; B.y -= dir * ov * wb; moved = true;
+        }
+      }
+      labs.forEach(function (L) { L.y = Math.max(L.h, Math.min(H - 4, L.y)); });
+      if (!moved) break;
+    }
+
+    var order = pts.map(function (p, k) { return k; }).sort(function (a, b) { return pts[b].t - pts[a].t; });
+    var layer = sv('g', {});
+    order.forEach(function (k) {
+      var p = pts[k], L = labs[k];
+      var grp = sv('g', { class: 'pt' });
+      var title = sv('title', {}); title.textContent = p.t === 0 ? p.label + ' (query)' : p.label + ' · similarity to “' + pts[p.parent].label + '”: ' + p.s.toFixed(3); grp.appendChild(title);
+      if (Math.abs(L.y - L.ay) > L.h * 0.6) grp.appendChild(sv('line', { x1: X(p), y1: Y(p), x2: L.x < X(p) ? L.x + L.w : L.x, y2: L.y - L.fs * 0.35, stroke: 'var(--muted)', 'stroke-opacity': 0.35, 'stroke-width': 0.8 }));
+      grp.appendChild(sv('circle', { cx: X(p), cy: Y(p), r: rad[p.t], fill: p.t === 0 ? '#E8634A' : p.t === 1 ? 'var(--pt-neighbor)' : 'var(--pt-ext)', 'fill-opacity': p.t === 2 ? 0.7 : 1, stroke: p.t === 2 ? 'none' : 'var(--base)', 'stroke-width': 2 }));
+      var tx = sv('text', { x: L.x, y: L.y, 'font-size': L.fs, 'font-weight': p.t === 0 ? 700 : p.t === 1 ? 600 : 400, fill: p.t === 0 ? '#E8634A' : p.t === 1 ? 'var(--text)' : 'var(--muted)' });
+      tx.textContent = p.label; grp.appendChild(tx);
+      grp.appendChild(sv('rect', { x: Math.min(X(p) - 10, L.x), y: Math.min(Y(p) - 10, L.y - L.h), width: Math.abs(L.x - X(p)) + L.w + 10, height: Math.max(20, L.h + 4), fill: 'transparent' }));
+      if (p.t !== 0) grp.addEventListener('click', function () { $('q').value = p.label; query(p.label); });
+      layer.appendChild(grp);
+    });
+    svg.appendChild(layer);
+    box.innerHTML = ''; box.appendChild(svg);
+  }
+
+  /* ---------- 3D canvas ---------- */
+  var view3d = (function () {
+    var cv = $('c3d'), ctx = cv.getContext('2d'), pts = [], P = [];
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var yaw = 0.6, pitch = -0.35, zoom = 1, auto = !reduce, dirty = true, visible = true, raf = 0;
+    var W = 0, H = 0, dpr = 1, colors = {};
+    var pointers = new Map(), dragMoved = 0, pinch0 = 0, zoom0 = 1, last = null, hoverIdx = -1;
+
+    function readColors() {
+      var cs = getComputedStyle(document.documentElement);
+      colors = { text: cs.getPropertyValue('--text').trim() || '#0F1E33', muted: cs.getPropertyValue('--muted').trim() || '#4F5A69', nb: cs.getPropertyValue('--pt-neighbor').trim() || '#0E7C86', ext: cs.getPropertyValue('--pt-ext').trim() || '#6B7685', base: cs.getPropertyValue('--base').trim() || '#EAF1F6', dark: document.documentElement.dataset.theme === 'dark' };
+    }
+    function resize() {
+      var r = cv.getBoundingClientRect(); dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = r.width; H = r.height; cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); dirty = true; kick();
+    }
+    function setPoints(list) {
+      // center on the mean and scale so the farthest point sits on the unit sphere
+      var c = [0, 0, 0]; list.forEach(function (p) { for (var k = 0; k < 3; k++) c[k] += p.c[k] / list.length; });
+      var mx = 1e-9; list.forEach(function (p) { var d = Math.hypot(p.c[0] - c[0], p.c[1] - c[1], p.c[2] - c[2]); if (d > mx) mx = d; });
+      pts = list.map(function (p) { return { x: (p.c[0] - c[0]) / mx, y: (p.c[1] - c[1]) / mx, z: (p.c[2] - c[2]) / mx, t: p.t, parent: p.parent, label: p.label }; });
+      dirty = true; kick();
+    }
+    function project() {
+      var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), d = 3.2;
+      var f = Math.min(W, H) * 0.36 * zoom;
+      function pr(x, y, z) {
+        var x1 = cy * x + sy * z, z1 = -sy * x + cy * z;
+        var y2 = cp * y - sp * z1, z2 = sp * y + cp * z1;
+        var s = f * d / (d - z2);
+        return { sx: W / 2 + x1 * s, sy: H / 2 - y2 * s, z: z2, k: d / (d - z2) };
+      }
+      P = pts.map(function (p) { var q = pr(p.x, p.y, p.z); q.p = p; return q; });
+      return pr;
+    }
+    function draw() {
+      if (!W) return;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      if (!pts.length) return;
+      var pr = project();
+      // axes
+      var o = pr(0, 0, 0), ax = [[1.15, 0, 0, 'PC1'], [0, 1.15, 0, 'PC2'], [0, 0, 1.15, 'PC3']];
+      ctx.lineWidth = 1; ctx.font = '500 11px Inter, sans-serif';
+      ax.forEach(function (a) {
+        var e = pr(a[0], a[1], a[2]), e2 = pr(-a[0], -a[1], -a[2]);
+        ctx.strokeStyle = colors.muted; ctx.globalAlpha = 0.22; ctx.beginPath(); ctx.moveTo(e2.sx, e2.sy); ctx.lineTo(e.sx, e.sy); ctx.stroke();
+        ctx.globalAlpha = 0.6; ctx.fillStyle = colors.muted; ctx.fillText(a[3], e.sx + 4, e.sy - 4);
+      });
+      // links
+      P.forEach(function (q) {
+        if (q.p.t === 0) return;
+        var par = P[q.p.parent], dep = ((q.z + par.z) / 2 + 1) / 2;
+        ctx.strokeStyle = q.p.t === 1 ? colors.nb : colors.ext;
+        ctx.globalAlpha = (q.p.t === 1 ? 0.25 : 0.12) + (q.p.t === 1 ? 0.35 : 0.15) * dep;
+        ctx.lineWidth = q.p.t === 1 ? 1.5 : 1;
+        ctx.beginPath(); ctx.moveTo(par.sx, par.sy); ctx.lineTo(q.sx, q.sy); ctx.stroke();
+      });
+      // points back-to-front
+      var order = P.slice().sort(function (a, b) { return a.z - b.z; });
+      var base = [8, 5.5, 3.2], fsz = [15, 13, 11];
+      order.forEach(function (q) {
+        var t = q.p.t, dep = Math.max(0, Math.min(1, (q.z + 1) / 2)), r = base[t] * q.k;
+        var hov = P.indexOf(q) === hoverIdx;
+        ctx.globalAlpha = 0.35 + 0.65 * dep;
+        ctx.fillStyle = t === 0 ? '#E8634A' : t === 1 ? colors.nb : colors.ext;
+        ctx.beginPath(); ctx.arc(q.sx, q.sy, hov ? r + 2 : r, 0, Math.PI * 2); ctx.fill();
+        if (t < 2) { ctx.strokeStyle = colors.base; ctx.lineWidth = 1.5; ctx.stroke(); }
+        var fs = Math.round(fsz[t] * (0.85 + 0.25 * q.k) * 10) / 10;
+        ctx.font = (t === 0 ? '700 ' : t === 1 ? '600 ' : '400 ') + fs + 'px Inter, sans-serif';
+        ctx.globalAlpha = t === 2 ? 0.25 + 0.6 * dep : 0.45 + 0.55 * dep;
+        if (hov) ctx.globalAlpha = 1;
+        ctx.lineWidth = 3; ctx.strokeStyle = colors.base; ctx.lineJoin = 'round';
+        var lx = q.sx + r + 4, ly = q.sy + fs * 0.35;
+        ctx.strokeText(q.p.label, lx, ly);
+        ctx.fillStyle = t === 0 ? '#E8634A' : t === 1 ? colors.text : colors.muted;
+        ctx.fillText(q.p.label, lx, ly);
+      });
+      ctx.globalAlpha = 1;
+    }
+    function frame() {
+      raf = 0;
+      if (!visible) return;
+      if (auto) { yaw += 0.0045; dirty = true; }
+      if (dirty) { draw(); dirty = false; }
+      if (auto) raf = requestAnimationFrame(frame);
+    }
+    function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
+    function setAuto(on) { auto = on; var b = $('spin'); b.textContent = on ? 'Pause' : 'Spin'; b.setAttribute('aria-pressed', String(on)); kick(); }
+    function stopAuto() { if (auto) setAuto(false); }
+
+    function hit(x, y) {
+      var best = -1, bd = 18 * 18;
+      P.forEach(function (q, k) { var dx = q.sx - x, dy = q.sy - y, d = dx * dx + dy * dy; if (d < bd || (d === bd && best >= 0 && q.z > P[best].z)) { bd = d; best = k; } });
+      return best;
+    }
+    function local(e) { var r = cv.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+    cv.addEventListener('pointerdown', function (e) {
+      cv.setPointerCapture(e.pointerId); pointers.set(e.pointerId, local(e)); stopAuto(); dragMoved = 0;
+      if (pointers.size === 2) { var a = Array.from(pointers.values()); pinch0 = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y); zoom0 = zoom; }
+      last = local(e); cv.classList.add('dragging');
+    });
+    cv.addEventListener('pointermove', function (e) {
+      var p = local(e);
+      if (!pointers.has(e.pointerId)) {
+        var h = hit(p.x, p.y); if (h !== hoverIdx) { hoverIdx = h; cv.classList.toggle('hover', h >= 0 && P[h].p.t !== 0); dirty = true; kick(); }
+        return;
+      }
+      var prev = pointers.get(e.pointerId); pointers.set(e.pointerId, p);
+      if (pointers.size === 1) {
+        var dx = p.x - prev.x, dy = p.y - prev.y; dragMoved += Math.abs(dx) + Math.abs(dy);
+        yaw += dx * 0.008; pitch = Math.max(-1.5, Math.min(1.5, pitch + dy * 0.008));
+      } else if (pointers.size === 2 && pinch0) {
+        var a = Array.from(pointers.values()); dragMoved += 10;
+        zoom = Math.max(0.5, Math.min(4, zoom0 * Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y) / pinch0));
+      }
+      dirty = true; kick();
+    });
+    function up(e) {
+      if (!pointers.has(e.pointerId)) return;
+      var p = local(e); pointers.delete(e.pointerId);
+      if (pointers.size < 2) pinch0 = 0;
+      if (!pointers.size) cv.classList.remove('dragging');
+      if (e.type === 'pointerup' && dragMoved < 6 && !pointers.size) {
+        var h = hit(p.x, p.y);
+        if (h >= 0 && P[h].p.t !== 0) { $('q').value = P[h].p.label; query(P[h].p.label); }
+      }
+    }
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+    cv.addEventListener('pointerleave', function () { if (hoverIdx !== -1) { hoverIdx = -1; dirty = true; kick(); } });
+    cv.addEventListener('wheel', function (e) { e.preventDefault(); stopAuto(); zoom = Math.max(0.5, Math.min(4, zoom * Math.exp(-e.deltaY * 0.0015))); dirty = true; kick(); }, { passive: false });
+    $('spin').addEventListener('click', function () { setAuto(!auto); });
+    $('zin').addEventListener('click', function () { zoom = Math.min(4, zoom * 1.25); dirty = true; kick(); });
+    $('zout').addEventListener('click', function () { zoom = Math.max(0.5, zoom / 1.25); dirty = true; kick(); });
+    $('reset').addEventListener('click', function () { yaw = 0.6; pitch = -0.35; zoom = 1; dirty = true; kick(); });
+    if (window.IntersectionObserver) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) { dirty = true; kick(); } }).observe(cv);
+    if (window.ResizeObserver) new ResizeObserver(resize).observe(cv); else window.addEventListener('resize', resize);
+    readColors(); resize(); setAuto(auto);
+    return { setPoints: setPoints, refreshTheme: function () { readColors(); dirty = true; kick(); } };
+  })();
+
+  var lastW2d = 0;
+  if (window.ResizeObserver) new ResizeObserver(function () { var w = $('box2d').clientWidth; if (Math.abs(w - lastW2d) > 2) { lastW2d = w; draw2d(); } }).observe($('box2d'));
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onMq = function () {
+      var t = 'system'; try { t = localStorage.getItem('puente-theme') || 'system'; } catch (e) {}
+      if (t === 'system') { document.documentElement.dataset.theme = mq.matches ? 'dark' : 'light'; view3d.refreshTheme(); }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
+  }
+
+  /* ---------- analogy ---------- */
+  function solveAnalogy() {
+    if (!M.V) return;
+    hideAllSuggest();
+    var ws = ['aA', 'aB', 'aC'].map(function (id) { return $(id).value.trim(); });
+    var out = $('anaOut'); out.innerHTML = '';
+    if (ws.some(function (w) { return !w; })) { out.appendChild(el('div', { class: 'msg', style: 'margin-top:14px', text: 'Fill in all three words.' })); return; }
+    var ids = ws.map(lookup), missing = ws.filter(function (w, k) { return ids[k] < 0; });
+    if (missing.length) {
+      out.appendChild(el('div', { class: 'msg', style: 'margin-top:14px' }, [el('strong', { text: missing.map(function (w) { return '“' + w + '”'; }).join(', ') }), ' ' + (missing.length > 1 ? 'are' : 'is') + ' not in the vocabulary. Try a more common word.']));
+      return;
+    }
+    var D = M.D, a = row(ids[0]), b = row(ids[1]), c = row(ids[2]), v = new Float32Array(D), n = 0, j;
+    for (j = 0; j < D; j++) { v[j] = b[j] - a[j] + c[j]; n += v[j] * v[j]; }
+    n = Math.sqrt(n) || 1; for (j = 0; j < D; j++) v[j] /= n;
+    var res = topK(v, K, new Set(ids));
+    var ol = el('ol', { class: 'ana-res' });
+    res.forEach(function (r) {
+      var btn = el('button', { type: 'button', title: 'Explore “' + M.vocab[r.i] + '”' }, [el('span', { class: 'w', text: M.vocab[r.i] }), el('span', { class: 's', text: r.s.toFixed(3) })]);
+      btn.addEventListener('click', function () { $('q').value = M.vocab[r.i]; query(M.vocab[r.i], { scroll: true }); });
+      ol.appendChild(el('li', null, [btn]));
+    });
+    out.appendChild(el('p', { class: 'note', style: 'margin-top:14px' }, [M.vocab[ids[0]] + ' : ' + M.vocab[ids[1]] + ' :: ' + M.vocab[ids[2]] + ' : ', el('strong', { class: 'q', text: res.length ? M.vocab[res[0].i] : '?' })]));
+    out.appendChild(ol);
+  }
+  $('anaForm').addEventListener('submit', function (e) { e.preventDefault(); solveAnalogy(); });
+
+  /* ---------- explainer ---------- */
+  function fillExplainer() {
+    var m = M.meta, p = m.params || {};
+    $('dimTxt').textContent = M.D;
+    var arch = p.sg === 1 || p.sg === '1' ? 'skip-gram (predict the surrounding words from the center word)' : p.sg === 0 || p.sg === '0' ? 'CBOW (predict the center word from its surroundings)' : null;
+    var bits = [];
+    bits.push('This model read ' + (m.corpus ? '“' + m.corpus + '”' : 'a text corpus') + (typeof m.tokens === 'number' ? ', about ' + fmt(m.tokens) + ' words in total' : '') + '.');
+    if (arch) bits.push('It uses the ' + arch + '.');
+    if (p.window) bits.push('“Context” means up to ' + p.window + ' words on either side.');
+    var mc = p.min_count || p.minCount;
+    if (mc) bits.push('Words seen fewer than ' + mc + ' times were dropped, leaving ' + fmt(M.N) + ' words.');
+    if (m.trained) { var d = new Date(m.trained); bits.push('Trained ' + (isNaN(d) ? m.trained : d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })) + '.'); }
+    bits.push('Vectors are stored as 8-bit integers to keep the download small, then re-normalized in your browser.');
+    $('trainText').textContent = bits.join(' ');
+    var stats = $('stats'); stats.innerHTML = '';
+    [[fmtBig(m.tokens != null ? m.tokens : '—'), 'training tokens'], [fmt(M.N), 'words in vocabulary'], [String(M.D), 'dimensions per word'], [p.epochs != null ? String(p.epochs) : (p.iter != null ? String(p.iter) : '—'), 'passes over the text']].forEach(function (s) {
+      stats.appendChild(el('div', { class: 'stat' }, [el('b', { text: s[0] }), el('span', { text: s[1] })]));
+    });
+    var names = { vector_size: 'dimensions', size: 'dimensions', window: 'window', min_count: 'min count', sg: 'architecture', negative: 'negative samples', hs: 'hierarchical softmax', epochs: 'epochs', iter: 'epochs', sample: 'subsampling', alpha: 'learning rate', min_alpha: 'final learning rate', workers: 'workers', seed: 'seed' };
+    var pp = $('params'); pp.innerHTML = '';
+    Object.keys(p).forEach(function (k) {
+      var v = p[k]; if (v === null || typeof v === 'object') return;
+      if (k === 'sg') v = (v === 1 || v === '1') ? 'skip-gram' : 'CBOW';
+      pp.appendChild(el('span', { text: (names[k] || k.replace(/_/g, ' ')) + ': ' + v }));
+    });
+  }
+
+  /* ---------- autocomplete ---------- */
+  var suggests = [];
+  function hideAllSuggest() { suggests.forEach(function (s) { s.hide(); }); }
+  function attachSuggest(input, onPick) {
+    var list = $(input.getAttribute('aria-controls')), items = [], sel = -1, t = 0;
+    function hide() { list.hidden = true; input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); sel = -1; items = []; }
+    function show() {
+      var v = input.value.trim().toLowerCase();
+      if (!M.lc || !v) { hide(); return; }
+      items = [];
+      for (var i = 0; i < M.N && items.length < 8; i++) if (M.ok[i] && M.lc[i].lastIndexOf(v, 0) === 0 && M.index.get(M.lc[i]) === i) items.push(i);
+      if (!items.length || (items.length === 1 && M.lc[items[0]] === v)) { hide(); return; }
+      list.innerHTML = ''; sel = -1;
+      items.forEach(function (i, k) {
+        var w = M.vocab[i];
+        var li = el('li', { role: 'option', id: list.id + '-' + k, 'aria-selected': 'false' }, [el('span', null, [el('b', { text: w.slice(0, v.length) }), w.slice(v.length)]), el('small', { text: '#' + fmt(i + 1) })]);
+        li.addEventListener('mousedown', function (e) { e.preventDefault(); input.value = w; hide(); onPick(w); });
+        list.appendChild(li);
+      });
+      list.hidden = false; input.setAttribute('aria-expanded', 'true');
+    }
+    function mark() {
+      Array.prototype.forEach.call(list.children, function (li, k) { li.setAttribute('aria-selected', String(k === sel)); if (k === sel) li.scrollIntoView({ block: 'nearest' }); });
+      if (sel >= 0) input.setAttribute('aria-activedescendant', list.id + '-' + sel); else input.removeAttribute('aria-activedescendant');
+    }
+    input.addEventListener('input', function () { clearTimeout(t); t = setTimeout(show, 40); });
+    input.addEventListener('focus', function () { if (input.value) show(); });
+    input.addEventListener('blur', function () { setTimeout(hide, 120); });
+    input.addEventListener('keydown', function (e) {
+      if (list.hidden) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); sel = (sel + 1) % items.length; mark(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); sel = (sel - 1 + items.length) % items.length; mark(); }
+      else if (e.key === 'Escape') { hide(); }
+      else if (e.key === 'Enter' && sel >= 0) { input.value = M.vocab[items[sel]]; }
+      else if (e.key === 'Tab' && sel >= 0) { input.value = M.vocab[items[sel]]; hide(); }
+    });
+    var api = { hide: hide }; suggests.push(api); return api;
+  }
+  attachSuggest($('q'), function (w) { query(w, { scroll: true }); });
+  ['aA', 'aB', 'aC'].forEach(function (id) { attachSuggest($(id), function () {}); });
+  $('searchForm').addEventListener('submit', function (e) { e.preventDefault(); query($('q').value, { scroll: true }); });
+
+  load();
+})();
+</script>
+</body>
+</html>
