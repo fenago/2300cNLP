@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html><head>
+<script>window.__resources = {"img3": "/assets/images/img3.jpg", "img5": "/assets/images/img5.jpg", "img4": "/assets/images/img4.png", "img1": "/assets/images/img1.jpg", "img2": "/assets/images/img2.jpg", "img0": "/assets/images/img0.jpg", "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "/assets/js/react.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "/assets/js/react-dom.production.min.js"};</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/assets/js/dc-runtime.js"></script>
+
+
+
+
+
+
+
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<style>/* latin-ext */
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-0.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'DM Serif Display';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-1.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-2.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-3.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-4.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-5.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-6.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-7.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("/assets/fonts/font-8.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-2.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-3.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-4.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-5.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-6.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-7.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/font-8.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-2.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-3.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-4.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-5.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-6.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-7.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/assets/fonts/font-8.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-2.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-3.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-4.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-5.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-6.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-7.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/assets/fonts/font-8.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-2.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-3.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-4.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-5.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-6.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-7.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/assets/fonts/font-8.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<script src="/assets/js/image-slot.js"></script>
+<style>:root{--surface:#fff;--alt:#F3F5F8;--text:#0F1E33;--muted:#4F5A69;--border:rgba(11,37,69,.10);--input-border:rgba(11,37,69,.16);--tint:rgba(20,184,166,.14);--heading:#0B2545;--link:#0B6B74;--glass:rgba(255,255,255,.52);--glass-strong:rgba(255,255,255,.78);--glass-weak:rgba(255,255,255,.42);--glass-border:rgba(255,255,255,.75);--glass-shadow:0 10px 40px rgba(11,37,69,.10),inset 0 1px 0 rgba(255,255,255,.9);--base:#EAF1F6;--a1:rgba(20,184,166,.38);--a2:rgba(244,201,93,.42);--a3:rgba(232,99,74,.30);--a4:rgba(19,66,107,.28)}[data-theme=dark]{color-scheme:dark;--surface:#101D30;--alt:#0A1626;--text:#F3F5F8;--muted:#B4BDCA;--border:rgba(255,255,255,.10);--input-border:rgba(255,255,255,.16);--tint:rgba(20,184,166,.16);--heading:#F3F5F8;--link:#3CCFBC;--glass:rgba(20,36,60,.48);--glass-strong:rgba(16,30,52,.80);--glass-weak:rgba(255,255,255,.06);--glass-border:rgba(255,255,255,.13);--glass-shadow:0 10px 40px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.10);--base:#06101D;--a1:rgba(20,184,166,.30);--a2:rgba(244,201,93,.16);--a3:rgba(232,99,74,.20);--a4:rgba(37,99,235,.22)}input:not([type=range]):not([type=checkbox]){background-color:var(--glass-weak);color:var(--text)}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,sans-serif;color:var(--text);background:radial-gradient(ellipse 60% 45% at 8% 12%,var(--a1),transparent 70%),radial-gradient(ellipse 50% 40% at 92% 28%,var(--a2),transparent 70%),radial-gradient(ellipse 55% 45% at 85% 82%,var(--a3),transparent 70%),radial-gradient(ellipse 60% 50% at 12% 78%,var(--a4),transparent 70%),var(--base);background-attachment:fixed;-webkit-font-smoothing:antialiased;transition:background-color .25s,color .25s}a{color:var(--link)}a:hover{color:var(--heading)}*:focus-visible{outline:2px solid #0E7C86;outline-offset:2px}input[type=range]{accent-color:#E8634A;width:100%;height:44px;cursor:pointer}@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</helmet>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:1000;background:{{ navBg }};backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid {{ navLine }};transition:background 300ms,height 300ms;height:{{ navH }}">
+  <div style="max-width:1440px;margin:0 auto;height:100%;padding:0 24px;display:flex;align-items:center;gap:32px;box-sizing:border-box">
+    <a href="#top" aria-label="Puente Capital home" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:#fff">
+      <svg width="40" height="40" sc-camel-view-box="0 0 40 40" aria-hidden="true" style="flex:none"><defs><linearGradient id="pc-tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13426B"></stop><stop offset="1" stop-color="#0B2545"></stop></linearGradient><linearGradient id="pc-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4C95D"></stop><stop offset="1" stop-color="#E8634A"></stop></linearGradient><clipPath id="pc-hz"><rect x="0" y="0" width="40" height="27"></rect></clipPath></defs><rect width="40" height="40" rx="10" fill="url(#pc-tile)"></rect><rect x=".5" y=".5" width="39" height="39" rx="9.5" fill="none" stroke="#fff" stroke-opacity=".14"></rect><circle cx="20" cy="27" r="7.5" fill="url(#pc-sun)" clip-path="url(#pc-hz)"></circle><path d="M6.5 27 A13.5 13.5 0 0 1 33.5 27" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M4 27H36" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M10.5 27v6M29.5 27v6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M15 31.5h10" stroke="#7DD3C0" stroke-width="1.6" stroke-linecap="round" opacity=".9"></path></svg><span style="display:flex;flex-direction:column;line-height:1"><span style="font-family:'DM Serif Display',serif;font-size:25px;letter-spacing:-.01em;white-space:nowrap">Puente</span><span style="font:600 9.5px Inter,sans-serif;letter-spacing:.32em;margin-top:3px;color:#F4C95D;white-space:nowrap">CAPITAL</span></span>
+    </a>
+    <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;gap:28px;flex:1">
+        <a href="#how" style="color:#fff;text-decoration:none;font-size:15px;font-weight:500;opacity:.9;white-space:nowrap" style-hover="opacity:1;color:#F4C95D">{{ t.nav1 }}</a>
+        <a href="#industries" style="color:#fff;text-decoration:none;font-size:15px;font-weight:500;opacity:.9;white-space:nowrap" style-hover="opacity:1;color:#F4C95D">{{ t.nav2 }}</a>
+        <a href="#calculator" style="color:#fff;text-decoration:none;font-size:15px;font-weight:500;opacity:.9;white-space:nowrap" style-hover="opacity:1;color:#F4C95D">{{ t.nav3 }}</a>
+        <a href="#faq" style="color:#fff;text-decoration:none;font-size:15px;font-weight:500;opacity:.9;white-space:nowrap" style-hover="opacity:1;color:#F4C95D">{{ t.nav4 }}</a>
+        <a href="#about" style="color:#fff;text-decoration:none;font-size:15px;font-weight:500;opacity:.9;white-space:nowrap" style-hover="opacity:1;color:#F4C95D">{{ t.nav5 }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:20px">
+        <div role="group" aria-label="Language" style="flex:none;display:flex;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.35);border-radius:12px;overflow:hidden"><button sc-camel-on-click="{{ setEn }}" style="padding:6px 10px;border:none;cursor:pointer;font:600 13px Inter,sans-serif;background:{{ enBg }};color:{{ enColor }}">EN</button><button sc-camel-on-click="{{ setEs }}" style="padding:6px 10px;border:none;cursor:pointer;font:600 13px Inter,sans-serif;background:{{ esBg }};color:{{ esColor }}">ES</button></div><div role="group" aria-label="Theme" style="flex:none;display:flex;border:1px solid rgba(255,255,255,.35);border-radius:12px;overflow:hidden"><sc-for list="{{ themes }}" as="th" hint-placeholder-count="3"><button sc-camel-on-click="{{ th.pick }}" aria-label="{{ th.label }}" title="{{ th.label }}" aria-pressed="{{ th.on }}" style="width:32px;height:28px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:{{ th.bg }};color:{{ th.color }}"><svg width="15" height="15" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ th.icon }}"></path></svg></button></sc-for></div>
+        <a href="tel:+13055550142" style="color:#fff;text-decoration:none;font-weight:600;font-size:15px;display:flex;gap:8px;align-items:center;font-variant-numeric:tabular-nums;white-space:nowrap"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106a1.125 1.125 0 0 0-1.173.417l-.97 1.293a1.125 1.125 0 0 1-1.21.38 12.035 12.035 0 0 1-7.143-7.143 1.125 1.125 0 0 1 .38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"></path></svg>(305) 555-0142</a>
+        <a href="#apply" style="background:#E8634A;color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:12px 22px;border-radius:14px;white-space:nowrap;transition:all 150ms ease-out" style-hover="background:#F59E5B;transform:translateY(-2px);box-shadow:0 8px 20px rgba(232,99,74,.35)">{{ t.getFunded }}</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ compact }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1"></div>
+      <sc-if value="{{ tablet }}" hint-placeholder-val="{{ false }}"><a href="#apply" style="background:#E8634A;color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:0 20px;height:48px;display:flex;align-items:center;border-radius:14px;white-space:nowrap">{{ t.getFunded }}</a></sc-if>
+      <button sc-camel-on-click="{{ toggleMenu }}" aria-label="Open menu" style="width:48px;height:48px;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:14px;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="22" height="22" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"></path></svg></button>
+    </sc-if>
+  </div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;top:0;right:0;bottom:0;width:80%;max-width:320px;background:#0B2545;padding:24px;display:flex;flex-direction:column;gap:4px;box-shadow:-20px 0 40px rgba(0,0,0,.3);box-sizing:border-box">
+      <button sc-camel-on-click="{{ toggleMenu }}" aria-label="Close menu" style="align-self:flex-end;width:48px;height:48px;background:transparent;border:none;color:#fff;font-size:28px;cursor:pointer">×</button>
+      <a href="#how" sc-camel-on-click="{{ toggleMenu }}" style="color:#fff;text-decoration:none;font-size:18px;padding:14px 0;border-bottom:1px solid #1E3350">{{ t.nav1 }}</a>
+      <a href="#industries" sc-camel-on-click="{{ toggleMenu }}" style="color:#fff;text-decoration:none;font-size:18px;padding:14px 0;border-bottom:1px solid #1E3350">{{ t.nav2 }}</a>
+      <a href="#calculator" sc-camel-on-click="{{ toggleMenu }}" style="color:#fff;text-decoration:none;font-size:18px;padding:14px 0;border-bottom:1px solid #1E3350">{{ t.nav3 }}</a>
+      <a href="#faq" sc-camel-on-click="{{ toggleMenu }}" style="color:#fff;text-decoration:none;font-size:18px;padding:14px 0;border-bottom:1px solid #1E3350">{{ t.nav4 }}</a>
+      <a href="#about" sc-camel-on-click="{{ toggleMenu }}" style="color:#fff;text-decoration:none;font-size:18px;padding:14px 0;border-bottom:1px solid #1E3350">{{ t.nav5 }}</a>
+      <div style="display:flex;gap:8px;margin-top:20px"><button sc-camel-on-click="{{ setEn }}" style="min-width:56px;height:48px;border:1px solid #1E3350;border-radius:12px;cursor:pointer;font:600 16px Inter,sans-serif;background:{{ enBg }};color:{{ enColor }}">EN</button><button sc-camel-on-click="{{ setEs }}" style="min-width:56px;height:48px;border:1px solid #1E3350;border-radius:12px;cursor:pointer;font:600 16px Inter,sans-serif;background:{{ esBg }};color:{{ esColor }}">ES</button></div>
+      <div style="margin-top:12px"><div role="group" aria-label="Theme" style="flex:none;display:flex;border:1px solid #1E3350;border-radius:12px;overflow:hidden"><sc-for list="{{ themes }}" as="th" hint-placeholder-count="3"><button sc-camel-on-click="{{ th.pick }}" aria-label="{{ th.label }}" title="{{ th.label }}" aria-pressed="{{ th.on }}" style="width:48px;height:48px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;background:{{ th.bg }};color:{{ th.color }}"><svg width="18" height="18" sc-camel-view-box="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{ th.icon }}"></path></svg></button></sc-for></div></div>
+    </div>
+  </sc-if>
+</header>
+
+<section id="top" data-screen-label="Hero" style="background:linear-gradient(135deg, #0B2545 0%, #13426B 18%, #0E7C86 36%, #14B8A6 52%, #7DD3C0 64%, #F4C95D 78%, #F59E5B 89%, #E8634A 100%);min-height:90vh;padding:120px 24px 64px;box-sizing:border-box;display:flex;align-items:center">
+  <div style="max-width:1200px;margin:0 auto;width:100%;display:flex;flex-wrap:wrap;gap:40px;align-items:center">
+    <div style="flex:3 1 520px;min-width:0;background:rgba(11,37,69,.52);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 80px rgba(11,37,69,.35);border-radius:32px;padding:clamp(28px,4vw,48px);color:#fff;box-sizing:border-box">
+      <span style="display:inline-block;background:#F4C95D;color:#0F1E33;font-size:13px;font-weight:600;padding:7px 14px;border-radius:999px">{{ t.badge }}</span>
+      <h1 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(44px,6.2vw,72px);line-height:1.05;margin:22px 0 20px;text-wrap:balance">{{ headline }}</h1>
+      <p style="font-size:clamp(17px,1.6vw,19px);line-height:1.6;margin:0 0 26px;color:#F3F5F8;max-width:560px;text-wrap:pretty">{{ t.sub }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 0;font-size:14px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:32px">
+        <span style="padding-right:14px;margin-right:14px;border-right:1px solid rgba(255,255,255,.3)">{{ t.tr1 }}</span>
+        <span style="padding-right:14px;margin-right:14px;border-right:1px solid rgba(255,255,255,.3)">{{ t.tr2 }}</span>
+        <span style="padding-right:14px;margin-right:14px;border-right:1px solid rgba(255,255,255,.3)">{{ t.tr3 }}</span>
+        <span lang="es">Hablamos Español</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:14px">
+        <a href="#apply" style="position:relative;overflow:hidden;background:#E8634A;color:#fff;text-decoration:none;font-weight:600;font-size:18px;padding:0 30px;height:56px;display:flex;align-items:center;border-radius:14px;transition:all 150ms ease-out" style-hover="background:#F59E5B;transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,99,74,.4)">{{ primaryCta }}</a>
+        <a href="tel:+13055550142" style="color:#fff;text-decoration:none;font-weight:600;font-size:18px;padding:0 26px;height:56px;display:flex;align-items:center;border:2px solid #fff;border-radius:14px;box-sizing:border-box;transition:background 150ms" style-hover="background:rgba(255,255,255,.1)">{{ t.talk }}</a>
+      </div>
+      <p style="font-size:13px;color:rgba(255,255,255,.75);margin:16px 0 0;line-height:1.5">{{ t.micro }}</p>
+    </div>
+
+    <div style="flex:2 1 340px;min-width:0;position:relative;height:600px;display:flex;align-items:center;justify-content:center">
+      <div style="position:absolute;inset:0;border-radius:28px;overflow:hidden;box-shadow:0 30px 60px rgba(11,37,69,.35)">
+        <image-slot id="hero-photo" shape="rect" placeholder="Photo: South Florida trades owner on the job" src="{{ imgs.img0 }}" credit="Photo by ThisisEngineering on Unsplash" credit-href="https://unsplash.com/@thisisengineering"></image-slot>
+      </div>
+      <div style="position:relative;width:270px;height:540px;background:#0A0A0A;border-radius:44px;padding:10px;box-sizing:border-box;box-shadow:0 30px 60px rgba(0,0,0,.45)">
+        <div style="width:100%;height:100%;border-radius:36px;background:linear-gradient(180deg,#0B2545,#13426B 60%,#0E7C86);overflow:hidden;position:relative;color:#fff">
+          <div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);width:90px;height:26px;background:#0A0A0A;border-radius:20px"></div>
+          <div style="text-align:center;margin-top:62px"><div style="font-size:13px;opacity:.8">Friday, July 18</div><div style="font-size:64px;font-weight:300;line-height:1.1;font-variant-numeric:tabular-nums">8:14</div></div>
+          <div style="margin:22px 12px 0;background:rgba(255,255,255,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.6);color:#0F1E33;border-radius:22px;padding:12px 14px;opacity:{{ notifOpacity }};transform:{{ notifTransform }};transition:all 500ms cubic-bezier(0.4,0,0.2,1)">
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:500"><span>YOUR BANK</span><span>now</span></div>
+            <div style="font-weight:600;font-size:14px;margin-top:4px">Incoming wire</div>
+            <div style="font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px">$30,000.00</div>
+            <div style="font-size:12px;color:var(--muted)">Received 8:14 AM</div>
+          </div>
+          <div style="margin:18px 16px 0;background:rgba(255,255,255,.12);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);border-radius:22px;padding:14px 16px;display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="width:24px;height:24px;border-radius:50%;background:{{ t.bg }};border:1.5px solid {{ t.border }};display:flex;align-items:center;justify-content:center;transition:all 300ms;flex:none"><svg width="13" height="13" sc-camel-view-box="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3.5" style="opacity:{{ t.check }}"><path d="m4.5 12.75 6 6 9-13.5"></path></svg></div>
+                <span style="font-size:14px;font-weight:{{ t.weight }};opacity:{{ t.op }};transition:opacity 300ms">{{ t.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="position:absolute;bottom:16px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:.08em;font-weight:600;opacity:.7">EXAMPLE</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Pain points" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="max-width:760px;margin:0 auto;text-align:center">
+      <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:0 0 20px">{{ t.painH }}</h2>
+      <p style="font-size:18px;line-height:1.6;color:var(--muted);margin:0;text-wrap:pretty">{{ t.painP }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px;margin-top:56px">
+      <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:32px;box-shadow:var(--glass-shadow);display:flex;flex-direction:column;gap:14px">
+        <svg width="36" height="36" sc-camel-view-box="0 0 24 24" fill="none" stroke="#E8634A" stroke-width="1.6"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v4M3 10.5h18M17 14.5v2.5l1.5 1.5"></path><circle cx="17" cy="17" r="4.5"></circle></svg>
+        <h3 style="font-size:22px;font-weight:600;line-height:1.3;margin:0">Rich on Paper, Broke in the Bank.</h3>
+        <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0">Invoices are out, checks are slow, and payroll can't wait.</p>
+        <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--border)">
+          <div style="font-size:48px;font-weight:700;color:#E8634A;line-height:1;font-variant-numeric:tabular-nums">27 days</div>
+          <p style="font-size:15px;line-height:1.5;margin:10px 0 8px">The median small business holds only about 27 days of cash buffer.</p>
+          <a href="https://www.jpmorganchase.com/institute/all-topics/business-growth-and-entrepreneurship/report-cash-flows-balances-and-buffer-days" style="font-size:12px;color:var(--muted)">JPMorgan Chase Institute, "Cash is King" (2016)</a>
+        </div>
+      </div>
+      <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:32px;box-shadow:var(--glass-shadow);display:flex;flex-direction:column;gap:14px">
+        <svg width="36" height="36" sc-camel-view-box="0 0 24 24" fill="none" stroke="#E8634A" stroke-width="1.6"><path d="M12 3 3 7.5h18L12 3ZM4.5 21h15M6 10.5v7M10 10.5v4M14 10.5v1M18 10.5v1"></path><path d="m15 15 5 5m0-5-5 5"></path></svg>
+        <h3 style="font-size:22px;font-weight:600;line-height:1.3;margin:0">The Bank Wants 90 Days and Perfect Credit.</h3>
+        <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0">Mountains of paperwork for a small amount, and a "no" weeks later.</p>
+        <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--border)">
+          <div style="font-size:48px;font-weight:700;color:#E8634A;line-height:1">46%</div>
+          <p style="font-size:15px;line-height:1.5;margin:10px 0 8px">of small businesses that weren't fully approved said lender requirements were too strict.</p>
+          <a href="https://www.fedsmallbusiness.org/-/media/project/clevelandfedtenant/fsbsite/reports/2026/2026-report-on-employer-firms/2026-report-on-employer-firms.pdf" style="font-size:12px;color:var(--muted)">Federal Reserve Banks, 2026 Report on Employer Firms</a>
+        </div>
+      </div>
+      <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:32px;box-shadow:var(--glass-shadow);display:flex;flex-direction:column;gap:14px">
+        <svg width="36" height="36" sc-camel-view-box="0 0 24 24" fill="none" stroke="#E8634A" stroke-width="1.6"><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106a1.125 1.125 0 0 0-1.173.417l-.97 1.293a1.125 1.125 0 0 1-1.21.38 12.035 12.035 0 0 1-7.143-7.143 1.125 1.125 0 0 1 .38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"></path><path d="M15 3.5a6 6 0 0 1 5.5 5.5M15 6.5a3 3 0 0 1 2.5 2.5"></path></svg>
+        <h3 style="font-size:22px;font-weight:600;line-height:1.3;margin:0">Turning Down Jobs You Already Won.</h3>
+        <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0">Every job you pass on goes to the competitor with the shiny new trucks.</p>
+        <div style="margin-top:auto;padding-top:20px;border-top:1px solid var(--border)">
+          <div style="font-size:48px;font-weight:700;color:#E8634A;line-height:1">57%</div>
+          <p style="font-size:15px;line-height:1.5;margin:10px 0 8px">Even at small banks, the most likely place to get approved, only 57% of applicants got the full amount they asked for.</p>
+          <a href="https://www.fedsmallbusiness.org/-/media/project/clevelandfedtenant/fsbsite/reports/2026/2026-report-on-employer-firms/2026-report-on-employer-firms.pdf" style="font-size:12px;color:var(--muted)">Federal Reserve Banks, 2026 Report on Employer Firms</a>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:clamp(20px,2vw,24px);font-weight:600;line-height:1.3;margin:56px auto 0;max-width:680px;font-style:italic">{{ t.familiar }}</p>
+  </div>
+</section>
+
+<section data-screen-label="Bank vs Bridge" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start">
+    <div style="flex:1 1 380px;min-width:0">
+      <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:0 0 24px;text-wrap:balance">{{ t.timingH }}</h2>
+      <p style="font-size:17px;line-height:1.65;color:var(--text);margin:0 0 16px">Banks look backward at your credit score, your tax returns and that rough year in 2020. But your business is moving <em>forward</em>. You've got trucks on the road, customers calling and money coming in every month. The gap isn't your business. It's the 30, 45, 60 days between doing the work and getting paid.</p>
+      <p style="font-size:17px;line-height:1.65;color:var(--text);margin:0 0 16px">A Puente advance bridges that gap. We review your business's real activity, including your deposits, your time in business and the work you have lined up, and give you a straight answer, usually the same day. You see the full cost in dollars before you sign, and the money is wired within 24 hours.</p>
+      <p style="font-size:17px;line-height:1.65;color:var(--text);margin:0">So you can make payroll on time, say yes to the big job, keep your best people and finally sleep through the night.</p>
+    </div>
+    <div style="flex:1.3 1 480px;min-width:0;display:flex;flex-direction:column;gap:24px">
+      <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;overflow:hidden;box-shadow:var(--glass-shadow)">
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.2fr);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">
+          <div style="padding:16px 18px;background:var(--glass-weak)"></div>
+          <div style="padding:16px 18px;background:var(--glass-weak);color:var(--muted)">Traditional Bank</div>
+          <div style="padding:16px 18px;background:#0B2545;color:#F4C95D">Puente Capital</div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.2fr);font-size:15px;line-height:1.45;border-top:1px solid var(--border)">
+          <div style="padding:16px 18px;font-weight:600">Time to funding</div><div style="padding:16px 18px;color:var(--muted)">Often weeks to months</div><div style="padding:16px 18px;background:var(--tint);font-weight:500">Within 24 hours of signing</div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.2fr);font-size:15px;line-height:1.45;border-top:1px solid var(--border)">
+          <div style="padding:16px 18px;font-weight:600">Paperwork</div><div style="padding:16px 18px;color:var(--muted)">Tax returns, business plan, financial statements</div><div style="padding:16px 18px;background:var(--tint);font-weight:500">Short application + recent bank statements</div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.2fr);font-size:15px;line-height:1.45;border-top:1px solid var(--border)">
+          <div style="padding:16px 18px;font-weight:600">Credit</div><div style="padding:16px 18px;color:var(--muted)">Strong credit typically required</div><div style="padding:16px 18px;background:var(--tint);font-weight:500">We look at the whole business</div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.2fr);font-size:15px;line-height:1.45;border-top:1px solid var(--border)">
+          <div style="padding:16px 18px;font-weight:600">Cost shown</div><div style="padding:16px 18px;color:var(--muted)">APR and fee schedule</div><div style="padding:16px 18px;background:var(--tint);font-weight:500">One flat cost in dollars, up front</div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.2fr);font-size:15px;line-height:1.45;border-top:1px solid var(--border)">
+          <div style="padding:16px 18px;font-weight:600">Who you talk to</div><div style="padding:16px 18px;color:var(--muted)">Whoever's at the desk</div><div style="padding:16px 18px;background:var(--tint);font-weight:500">A named funding specialist, EN or ES</div>
+        </div>
+      </div>
+      <div style="background:rgba(125,211,192,.22);border-left:4px solid #0E7C86;padding:22px 26px;font-size:19px;line-height:1.45;font-weight:600;color:var(--heading)">Unlike a bank, we fund the business you're running today, not the credit score you had in 2020.</div>
+    </div>
+  </div>
+</section>
+
+<section id="how" data-screen-label="How it works" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link);text-align:center">How it works</div>
+    <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:10px 0 56px;text-align:center">{{ t.stepsH }}</h2>
+    <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:40px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:#0B2545;color:#F4C95D;font-family:'DM Serif Display',serif;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none">1</div><div style="flex:1;height:2px;background:linear-gradient(90deg,#14B8A6,rgba(20,184,166,0))"></div></div>
+        <h3 style="font-size:22px;font-weight:600;margin:6px 0 0">Apply in about 15 minutes.</h3>
+        <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0">Tell us about your business and connect or upload your last 3 months of bank statements, right from your phone.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:#0B2545;color:#F4C95D;font-family:'DM Serif Display',serif;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none">2</div><div style="flex:1;height:2px;background:linear-gradient(90deg,#14B8A6,rgba(20,184,166,0))"></div></div>
+        <h3 style="font-size:22px;font-weight:600;margin:6px 0 0">Get your offer, often the same day.</h3>
+        <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0">A real funding specialist reviews it and walks you through the amount, total cost and payment schedule in plain dollars.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:14px"><div style="width:56px;height:56px;border-radius:50%;background:#E8634A;color:#fff;font-family:'DM Serif Display',serif;font-size:28px;display:flex;align-items:center;justify-content:center;flex:none">3</div></div>
+        <h3 style="font-size:22px;font-weight:600;margin:6px 0 0">Sign and get funded.</h3>
+        <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0">Sign electronically, and the money is wired to your business account within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="industries" data-screen-label="Benefits" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:clamp(64px,8vw,100px)">
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:1 1 380px;min-width:0">
+        <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link)">Within 24 hours</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:10px 0 16px">Speed That Matches Your Season</h3>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin:0">When it's July in Miami and every AC is breaking, you can't wait 90 days. Our process is built for speed. Apply in the morning, and if you're approved and sign, you can have the funds within 24 hours.</p>
+      </div>
+      <div style="flex:1 1 380px;min-width:0;aspect-ratio:4/3;border-radius:24px;overflow:hidden;position:relative"><image-slot id="benefit-1" shape="rect" placeholder="AC season photo" src="{{ imgs.img1 }}" credit="Photo by HUUM on Unsplash" credit-href="https://unsplash.com/@huumsauna"></image-slot><div style="position:absolute;top:20px;right:20px;width:min(260px,70%);background:rgba(255,255,255,.7);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid rgba(255,255,255,.6);color:#0F1E33;border-radius:22px;padding:14px 16px;box-shadow:0 16px 40px rgba(0,0,0,.25);pointer-events:none;font-variant-numeric:tabular-nums"><div style="display:flex;justify-content:space-between;font-size:11px;color:#5B6675;font-weight:500"><span>YOUR BANK</span><span>8:14 AM</span></div><div style="font-weight:600;font-size:14px;margin-top:4px">Incoming wire</div><div style="font-size:24px;font-weight:700">$30,000.00</div><div style="font-size:11px;color:#5B6675;margin-top:2px">Example</div></div></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap-reverse;gap:48px;align-items:center">
+      <div style="flex:1 1 380px;min-width:0;aspect-ratio:4/3;border-radius:24px;overflow:hidden;background:var(--glass-weak);display:flex;align-items:center;justify-content:center;padding:32px;box-sizing:border-box">
+        <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:28px;width:100%;max-width:340px;box-shadow:0 12px 30px rgba(11,37,69,.12);font-variant-numeric:tabular-nums">
+          <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)">Your advance</div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:16px"><span>You receive</span><strong>$30,000</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:16px"><span>Cost (9 points)</span><strong>$2,700</strong></div>
+          <div style="display:flex;justify-content:space-between;padding:14px 0 0;font-size:18px"><span>Total payback</span><strong style="color:var(--link)">$32,700</strong></div>
+        </div>
+      </div>
+      <div style="flex:1 1 380px;min-width:0">
+        <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link)">Every dollar shown up front</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:10px 0 16px">One Clear Cost, No Surprises</h3>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin:0">You'll see exactly what you receive, exactly what you pay back and exactly how payments work before you sign. No hidden fees and no fine print jumping out of the bushes.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:1 1 380px;min-width:0">
+        <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link)">Your whole story counts</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:10px 0 16px">We Look at Your Business, Not Just Your Score</h3>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin:0">Took a hit during COVID? You're not alone. We weigh your time in business, your monthly deposits and the work you have coming in, not just one number from a credit bureau.</p>
+      </div>
+      <div style="flex:1 1 380px;min-width:0;aspect-ratio:4/3;border-radius:24px;overflow:hidden"><image-slot id="benefit-3" shape="rect" placeholder="Owner with his crew" src="{{ imgs.img2 }}" credit="Photo by Singapore Stock Photos on Unsplash" credit-href="https://unsplash.com/@singaporestockphoto"></image-slot></div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap-reverse;gap:48px;align-items:center">
+      <div style="flex:1 1 380px;min-width:0;aspect-ratio:4/3;border-radius:24px;background:#0B2545;display:flex;flex-direction:column;justify-content:center;padding:40px;box-sizing:border-box;color:#fff;gap:18px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#A7B0BE;font-weight:500"><span>$2,000</span><span>$150,000</span></div>
+        <div style="position:relative;height:8px;background:#1E3350;border-radius:4px"><div style="position:absolute;left:0;top:0;bottom:0;width:20%;background:linear-gradient(90deg,#14B8A6,#F4C95D);border-radius:4px"></div><div style="position:absolute;left:20%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border-radius:50%;box-shadow:0 4px 12px rgba(0,0,0,.3)"></div></div>
+        <div style="font-size:clamp(40px,5vw,60px);font-weight:300;font-variant-numeric:tabular-nums;margin-top:12px">$30,000</div>
+      </div>
+      <div style="flex:1 1 380px;min-width:0">
+        <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link)">$2,000–$150,000</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:10px 0 16px">Sized to Your Need, from $2K to $150K</h3>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin:0">Need $2,000 for a parts order or $150,000 for a commercial contract? Take what the job needs, not what a bank's minimum dictates.</p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:1 1 380px;min-width:0">
+        <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--link)">Your own specialist</div>
+        <h3 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:10px 0 16px">Real People, in English or Spanish</h3>
+        <p style="font-size:17px;line-height:1.65;color:var(--muted);margin:0">Talk to a named funding specialist who knows South Florida business. No call-center maze, no 'press 1.' <span lang="es">Hablamos Español.</span></p>
+      </div>
+      <div style="flex:1 1 380px;min-width:0;aspect-ratio:4/3;border-radius:24px;overflow:hidden"><image-slot id="benefit-5" shape="rect" placeholder="Funding specialist on the phone" src="{{ imgs.img3 }}" credit="Photo by Vitaly Gariev on Unsplash" credit-href="https://unsplash.com/@silverkblack"></image-slot></div>
+    </div>
+  </div>
+</section>
+
+<section id="calculator" data-screen-label="Calculator" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:40px">
+      <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:0 0 12px">{{ t.calcH }}</h2>
+      <p style="font-size:18px;color:var(--muted);margin:0">{{ t.calcSub }}</p>
+    </div>
+    <div style="background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border:1px solid var(--glass-border);border-radius:28px;box-shadow:var(--glass-shadow),0 0 0 1px rgba(20,184,166,.18),0 30px 90px rgba(14,124,134,.20);overflow:hidden">
+      <div role="tablist" style="display:flex;border-bottom:1px solid var(--border)">
+        <button role="tab" sc-camel-on-click="{{ setTabA }}" style="flex:1;min-height:60px;border:none;cursor:pointer;font:600 16px Inter,sans-serif;background:{{ tabABg }};color:{{ tabAColor }};box-shadow:{{ tabALine }}">{{ t.tabA }}</button>
+        <button role="tab" sc-camel-on-click="{{ setTabB }}" style="flex:1;min-height:60px;border:none;cursor:pointer;font:600 16px Inter,sans-serif;background:{{ tabBBg }};color:{{ tabBColor }};box-shadow:{{ tabBLine }}">{{ t.tabB }}</button>
+      </div>
+      <div style="padding:clamp(24px,4vw,40px);display:flex;flex-wrap:wrap;gap:40px">
+        <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:22px">
+          <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
+            <label style="display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:600">Value of the job you could take on
+              <input type="text" inputmode="numeric" value="{{ jobDisplay }}" sc-camel-on-change="{{ onJob }}" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 16px;font:600 18px Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--text)" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86;border-color:var(--link)">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:2px;font-size:15px;font-weight:600"><span style="display:flex;justify-content:space-between">Your profit margin on that job<span style="font-variant-numeric:tabular-nums">{{ margin }}%</span></span>
+              <input type="range" min="5" max="60" step="1" value="{{ margin }}" sc-camel-on-change="{{ onMargin }}">
+            </label>
+          </sc-if>
+          <label style="display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:600">Advance amount
+            <input type="text" inputmode="numeric" value="{{ amountDisplay }}" sc-camel-on-change="{{ onAmountText }}" sc-camel-on-blur="{{ clampAmount }}" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 16px;font:600 18px Inter,sans-serif;font-variant-numeric:tabular-nums;color:var(--text)" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86;border-color:var(--link)">
+            <input type="range" min="2000" max="150000" step="1000" value="{{ amount }}" sc-camel-on-change="{{ onAmount }}" aria-label="Advance amount slider">
+            <span style="display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:500;margin-top:-6px"><span>$2,000</span><span>$150,000</span></span>
+          </label>
+          <label style="display:flex;flex-direction:column;gap:2px;font-size:15px;font-weight:600"><span style="display:flex;justify-content:space-between">Estimated cost in points<span style="font-variant-numeric:tabular-nums">{{ points }} pts</span></span>
+            <input type="range" min="6" max="12" step="1" value="{{ points }}" sc-camel-on-change="{{ onPoints }}">
+            <span style="font-size:13px;color:var(--muted);font-weight:400">Estimated. Your actual offer depends on your business.</span>
+          </label>
+        </div>
+
+        <div aria-live="polite" style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:16px;font-variant-numeric:tabular-nums">
+          <sc-if value="{{ isA }}" hint-placeholder-val="{{ true }}">
+            <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)">Total payback</div>
+            <div style="font-size:clamp(48px,6vw,60px);font-weight:700;line-height:1;color:var(--heading)">{{ payback }}</div>
+            <div style="display:flex;flex-direction:column;margin-top:8px">
+              <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:17px"><span>Amount you receive</span><strong>{{ amountDisplay }}</strong></div>
+              <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);font-size:17px"><span>Total cost in dollars</span><strong style="color:#E8634A">{{ cost }}</strong></div>
+              <div style="display:flex;justify-content:space-between;padding:14px 0;font-size:17px"><span>Total payback</span><strong>{{ payback }}</strong></div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)">Net profit after advance cost</div>
+            <div style="font-size:56px;font-weight:700;line-height:1;color:{{ netColor }}">{{ net }}</div>
+            <p style="font-size:16px;line-height:1.5;margin:0">You'd spend <strong>{{ cost }}</strong> to take on a job that earns about <strong>{{ jobProfit }}</strong> in profit.</p>
+            <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+              <div style="font-size:13px;font-weight:600;display:flex;justify-content:space-between"><span>Pass on the job</span><span>$0</span></div>
+              <div style="height:14px;background:var(--border);border-radius:4px"><div style="width:2%;height:100%;background:#5B6675;border-radius:4px"></div></div>
+              <div style="font-size:13px;font-weight:600;display:flex;justify-content:space-between"><span>Take the job</span><span>{{ net }}</span></div>
+              <div style="height:14px;background:var(--border);border-radius:4px"><div style="width:{{ takeWidth }};height:100%;background:{{ netColor }};border-radius:4px;transition:width 300ms"></div></div>
+            </div>
+            <div style="display:flex;gap:24px;font-size:14px;color:var(--muted);margin-top:4px"><span>Job profit <strong style="color:var(--text)">{{ jobProfit }}</strong></span><span>Return <strong style="color:var(--text)">{{ multiple }}</strong></span></div>
+            <sc-if value="{{ notWorth }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="background:#FEF3E2;border:1px solid #D97706;color:#7A4304;border-radius:14px;padding:14px 16px;font-size:15px;line-height:1.5">At these numbers, this job may not be worth financing. Talk to a specialist.</div>
+            </sc-if>
+          </sc-if>
+          <a href="#apply" style="margin-top:8px;background:#E8634A;color:#fff;text-decoration:none;font-weight:600;font-size:18px;height:56px;display:flex;align-items:center;justify-content:center;border-radius:14px;transition:all 150ms ease-out" style-hover="background:#F59E5B;transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,99,74,.35)">{{ t.getOffer }}</a>
+        </div>
+      </div>
+      <p style="margin:0;padding:18px clamp(24px,4vw,40px);background:var(--glass-weak);font-size:12px;line-height:1.5;color:var(--muted)">Estimate for illustration only. This is not an offer or commitment to fund. Your actual amount, cost, payment amount and frequency will be stated in your written disclosure and agreement.</p>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Stories" style="color:#fff;padding:clamp(40px,5vw,64px) 16px">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,80px) clamp(20px,4vw,48px);border-radius:40px;background:linear-gradient(135deg,rgba(11,37,69,.88),rgba(19,66,107,.78));backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%);border:1px solid rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 40px 100px rgba(11,37,69,.30);box-sizing:border-box">
+    <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:0 0 48px;max-width:640px">{{ t.storiesH }}</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:0;border:1px solid rgba(255,255,255,.14);border-radius:28px;overflow:hidden;background:rgba(255,255,255,.04)">
+      <div style="flex:1 1 360px;min-width:0;min-height:380px;position:relative;background:#13253F"><image-slot id="story-photo" shape="rect" placeholder="Real customer photo (signed release)" src="{{ imgs.img4 }}" credit="Photo by Toolmash Expo on Unsplash" credit-href="https://unsplash.com/@toolmash"></image-slot><span style="position:absolute;top:16px;left:16px;background:rgba(11,37,69,.85);color:#fff;font-size:12px;font-weight:500;padding:6px 10px;border-radius:4px;pointer-events:none">Illustrative photo. Not a customer.</span></div>
+      <div style="flex:1.4 1 420px;min-width:0;padding:clamp(28px,4vw,48px);display:flex;flex-direction:column;gap:22px">
+        <span style="align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:#0F1E33;background:#F4C95D;padding:5px 10px;border-radius:4px">Example scenario. Not an actual customer.</span>
+        <div style="font-size:14px;font-weight:500;color:#A7B0BE">HVAC contractor · Hialeah · 9 employees</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:20px">
+          <div><div style="font-size:32px;font-weight:700;color:#14B8A6;font-variant-numeric:tabular-nums">$30,000</div><div style="font-size:14px;color:#A7B0BE">funded</div></div>
+          <div><div style="font-size:32px;font-weight:700;color:#14B8A6">Next morning</div><div style="font-size:14px;color:#A7B0BE">wired</div></div>
+          <div><div style="font-size:32px;font-weight:700;color:#14B8A6;font-variant-numeric:tabular-nums">$38,000</div><div style="font-size:14px;color:#A7B0BE">job taken on</div></div>
+        </div>
+        <blockquote style="margin:0;font-family:'DM Serif Display',serif;font-size:clamp(22px,2.3vw,28px);line-height:1.35">"I had seventeen calls in one day and $6,000 in the account. The bank wanted 90 days. Puente had the money in my account the next morning, and I took the biggest commercial job I've ever done."</blockquote>
+        <a href="#" style="color:#F4C95D;font-weight:600">Read the Full Story</a>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:56px;border-top:1px solid #1E3350;border-bottom:1px solid #1E3350">
+      <div style="padding:28px 20px;text-align:center"><div style="font-size:28px;font-weight:700;color:#F4C95D">$2K–$150K</div><div style="font-size:14px;color:#A7B0BE;margin-top:4px">Funding range</div></div>
+      <div style="padding:28px 20px;text-align:center"><div style="font-size:28px;font-weight:700;color:#F4C95D">Within 24 hours</div><div style="font-size:14px;color:#A7B0BE;margin-top:4px">After you sign</div></div>
+      <div style="padding:28px 20px;text-align:center"><div style="font-size:28px;font-weight:700;color:#F4C95D">One flat cost</div><div style="font-size:14px;color:#A7B0BE;margin-top:4px">Shown in dollars</div></div>
+      <div style="padding:28px 20px;text-align:center"><div style="font-size:28px;font-weight:700;color:#F4C95D">English &amp; Español</div><div style="font-size:14px;color:#A7B0BE;margin-top:4px">Real people</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" data-screen-label="Funding options" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:1400px;margin:0 auto">
+    <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:0 0 56px;text-align:center">{{ t.optionsH }}</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;align-items:center">
+      <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:32px;min-height:480px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--glass-shadow);transition:all 200ms;box-sizing:border-box" style-hover="transform:translateY(-4px);box-shadow:0 14px 30px rgba(11,37,69,.14)">
+        <div style="font-size:22px;font-weight:600">Quick Bridge</div>
+        <div style="font-size:34px;font-weight:300;font-variant-numeric:tabular-nums">$2,000–$25,000</div>
+        <p style="font-size:15px;line-height:1.55;color:var(--muted);margin:0"><strong style="color:var(--text)">Best for:</strong> parts and inventory orders, a short payroll gap, emergency repairs</p>
+        <div style="font-size:15px">Estimated cost: <strong>6–12 points</strong></div>
+        <div style="background:var(--glass-weak);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums">$10,000 advance at 9 points = $900 cost, $10,900 total payback</div>
+        <a href="#apply" style="margin-top:auto;height:52px;display:flex;align-items:center;justify-content:center;border:2px solid #0E7C86;color:var(--link);border-radius:14px;text-decoration:none;font-weight:600;font-size:16px" style-hover="background:rgba(14,124,134,.1)">Apply Now</a>
+      </div>
+      <div style="position:relative;background:var(--glass-strong);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:2px solid #E8634A;border-radius:24px;padding:32px;min-height:520px;display:flex;flex-direction:column;gap:16px;box-shadow:0 20px 40px rgba(11,37,69,.14);transform:translateY(-8px);box-sizing:border-box">
+        <span style="position:absolute;top:-14px;left:32px;background:#F4C95D;color:#0F1E33;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:6px 12px;border-radius:999px">Most Popular</span>
+        <div style="font-size:22px;font-weight:600">Growth Bridge</div>
+        <div style="font-size:34px;font-weight:300;font-variant-numeric:tabular-nums">$25,000–$75,000</div>
+        <p style="font-size:15px;line-height:1.55;color:var(--muted);margin:0"><strong style="color:var(--text)">Best for:</strong> taking on a large contract, seasonal stocking, adding a truck or crew</p>
+        <div style="font-size:15px">Estimated cost: <strong>6–12 points</strong></div>
+        <div style="background:var(--glass-weak);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums">$30,000 advance at 9 points = $2,700 cost, $32,700 total payback</div>
+        <a href="#apply" style="margin-top:auto;height:56px;display:flex;align-items:center;justify-content:center;background:#E8634A;color:#fff;border-radius:14px;text-decoration:none;font-weight:600;font-size:18px;transition:all 150ms" style-hover="background:#F59E5B;transform:translateY(-2px)">Apply Now</a>
+      </div>
+      <div style="background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:32px;min-height:480px;display:flex;flex-direction:column;gap:16px;box-shadow:var(--glass-shadow);transition:all 200ms;box-sizing:border-box" style-hover="transform:translateY(-4px);box-shadow:0 14px 30px rgba(11,37,69,.14)">
+        <div style="font-size:22px;font-weight:600">Major Bridge</div>
+        <div style="font-size:34px;font-weight:300;font-variant-numeric:tabular-nums">$75,000–$150,000</div>
+        <p style="font-size:15px;line-height:1.55;color:var(--muted);margin:0"><strong style="color:var(--text)">Best for:</strong> commercial projects, equipment, expansion, a second location</p>
+        <div style="font-size:15px">Estimated cost: <strong>6–12 points</strong></div>
+        <div style="background:var(--glass-weak);border-radius:14px;padding:14px 16px;font-size:14px;line-height:1.5;font-variant-numeric:tabular-nums">$100,000 advance at 9 points = $9,000 cost, $109,000 total payback</div>
+        <div style="font-size:14px;color:var(--link);font-weight:600">Includes a dedicated senior funding specialist</div>
+        <a href="tel:+13055550142" style="margin-top:auto;height:52px;display:flex;align-items:center;justify-content:center;border:2px solid #0E7C86;color:var(--link);border-radius:14px;text-decoration:none;font-weight:600;font-size:16px" style-hover="background:rgba(14,124,134,.1)">Talk to a Specialist</a>
+      </div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin:24px 0 0">Examples are for illustration only and are not an offer or commitment to fund.</p>
+
+    <div style="max-width:1200px;margin:80px auto 0;display:flex;flex-wrap:wrap;gap:56px">
+      <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:36px">
+        <div>
+          <h3 style="font-size:20px;font-weight:600;margin:0 0 16px">What every advance includes</h3>
+          <ul style="margin:0;padding:0 0 0 20px;font-size:16px;line-height:1.6;display:flex;flex-direction:column;gap:8px">
+            <li>A written disclosure of the full cost before you sign</li>
+            <li>No application fee</li>
+            <li>A named funding specialist, in English or Spanish</li>
+            <li>Electronic signing from your phone</li>
+            <li>Funds wired directly to your business bank account</li>
+            <li>Clear payment schedule in writing</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-size:20px;font-weight:600;margin:0 0 16px">What you'll need to apply</h3>
+          <ol style="margin:0;padding:0 0 0 20px;font-size:16px;line-height:1.6;display:flex;flex-direction:column;gap:8px">
+            <li>Business bank account</li>
+            <li>Last 3 months of bank statements</li>
+            <li>Government-issued ID</li>
+          </ol>
+        </div>
+      </div>
+      <div style="flex:1.6 1 440px;min-width:0">
+        <h3 style="font-size:20px;font-weight:600;margin:0 0 8px">Questions owners ask</h3>
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+          <div style="border-bottom:1px solid var(--border)">
+            <button sc-camel-on-click="{{ f.toggle }}" aria-expanded="{{ f.open }}" style="width:100%;min-height:64px;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;cursor:pointer;text-align:left;font:600 17px Inter,sans-serif;color:var(--text);padding:12px 0">{{ f.q }}<span style="font-size:24px;font-weight:300;color:var(--link);flex:none">{{ f.icon }}</span></button>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}"><p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:var(--muted);max-width:620px">{{ f.a }}</p></sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 0;margin-top:56px;font-size:15px;font-weight:500;color:var(--muted)">
+      <span style="padding:0 16px;border-right:1px solid var(--border)">Cost shown up front</span><span style="padding:0 16px;border-right:1px solid var(--border)">No hidden fees</span><span style="padding:0 16px;border-right:1px solid var(--border)">Real humans, EN/ES</span><span style="padding:0 16px">Secure application</span>
+    </div>
+  </div>
+</section>
+
+<section id="about" data-screen-label="Trust and security" style="background:transparent;padding:clamp(80px,8vw,100px) 24px">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:48px">
+    <div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:20px">
+      <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:0">{{ t.legitH }}</h2>
+      <div style="aspect-ratio:16/9;border-radius:24px;overflow:hidden"><iframe title="Office location map" src="https://www.openstreetmap.org/export/embed.html?bbox=-80.33%2C25.80%2C-80.25%2C25.86&amp;layer=mapnik&amp;marker=25.83%2C-80.29" style="width:100%;height:100%;border:0;display:block" loading="lazy"></iframe></div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;font-size:15px;line-height:1.55">
+        <div><div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Office</div>[Street address]<br>Miami, FL [ZIP]</div>
+        <div><div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Hours</div>Mon–Fri 8 a.m.–7 p.m.<br>Sat 9 a.m.–1 p.m.</div>
+        <div><div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:6px">Registered entity</div>[Sunbiz entity name]</div>
+      </div>
+    </div>
+    <div style="flex:1 1 420px;min-width:0;background:var(--glass);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%);border:1px solid var(--glass-border);border-radius:24px;padding:clamp(28px,4vw,40px);display:flex;flex-direction:column;gap:20px;box-sizing:border-box">
+      <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(28px,3vw,36px);line-height:1.2;margin:0">{{ t.secureH }}</h2>
+      <div style="display:flex;flex-direction:column">
+        <div style="padding:16px 0;border-bottom:1px solid var(--border);font-size:16px;line-height:1.5">256-bit TLS encryption on every page and upload</div>
+        <div style="padding:16px 0;border-bottom:1px solid var(--border);font-size:16px;line-height:1.5">Bank statements stored encrypted and accessed only by your funding team</div>
+        <div style="padding:16px 0;border-bottom:1px solid var(--border);font-size:16px;line-height:1.5">Read-only bank verification. We can never move money from a connection.</div>
+        <div style="padding:16px 0;font-size:16px;line-height:1.5">We never sell your information</div>
+      </div>
+      <div style="display:flex;gap:24px;font-size:15px;font-weight:600"><a href="#">Privacy Policy</a><a href="#">How We Protect Your Data</a></div>
+    </div>
+  </div>
+</section>
+
+<section data-screen-label="Video" style="background:transparent;padding:clamp(80px,9vw,120px) 24px">
+  <div style="max-width:900px;margin:0 auto;text-align:center">
+    <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(30px,3.6vw,40px);line-height:1.2;margin:0 0 32px">{{ t.videoH }}</h2>
+    <div style="position:relative;aspect-ratio:16/9;border-radius:24px;overflow:hidden;box-shadow:0 20px 50px rgba(11,37,69,.15)">
+      <image-slot id="video-thumb" shape="rect" placeholder="Video thumbnail: founder on camera" src="{{ imgs.img5 }}" credit="Photo by LumenSoft Technologies on Unsplash" credit-href="https://unsplash.com/@candelarms"></image-slot>
+      <button aria-label="Play video" style="position:absolute;top:50%;left:50%;width:84px;height:84px;margin:-42px 0 0 -42px;border-radius:50%;background:#E8634A;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.3)" style-hover="background:#F59E5B"><svg width="30" height="30" sc-camel-view-box="0 0 24 24" fill="#fff"><path d="M8 5.5v13l11-6.5z"></path></svg></button>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 24px;margin-top:20px;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums">
+      <span>0:00 Who we help</span><span>0:40 How the cost works</span><span>1:20 The 3 steps</span><span>2:00 What to have ready</span>
+    </div>
+    <p style="font-size:16px;margin:28px 0 0"><a href="#apply" style="font-weight:600">Ready now? Start your application</a> · Rather talk it through? Call us at <a href="tel:+13055550142" style="font-weight:600">(305) 555-0142</a></p>
+  </div>
+</section>
+
+<section id="apply" data-screen-label="Final CTA" style="background:linear-gradient(135deg, #0B2545 0%, #13426B 18%, #0E7C86 36%, #14B8A6 52%, #7DD3C0 64%, #F4C95D 78%, #F59E5B 89%, #E8634A 100%);padding:clamp(100px,11vw,150px) 24px">
+  <div style="max-width:800px;margin:0 auto;background:rgba(11,37,69,.52);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 30px 80px rgba(11,37,69,.35);border-radius:32px;padding:clamp(32px,5vw,56px);color:#fff;text-align:center">
+    <h2 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:clamp(36px,4.6vw,52px);line-height:1.12;margin:0 0 20px;text-wrap:balance">{{ t.finalH }}</h2>
+    <p style="font-size:18px;line-height:1.6;color:#F3F5F8;margin:0 auto 32px;max-width:580px">{{ t.finalP }}</p>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center">
+      <a href="#apply" style="background:#E8634A;color:#fff;text-decoration:none;font-weight:600;font-size:18px;padding:0 36px;height:60px;display:flex;align-items:center;border-radius:14px;transition:all 150ms ease-out" style-hover="background:#F59E5B;transform:translateY(-2px);box-shadow:0 10px 24px rgba(232,99,74,.4)">{{ t.getFundedNow }}</a>
+      <a href="tel:+13055550142" style="color:#fff;text-decoration:none;font-weight:600;font-size:18px;padding:0 28px;height:60px;display:flex;align-items:center;border:2px solid #fff;border-radius:14px;box-sizing:border-box" style-hover="background:rgba(255,255,255,.1)">{{ t.callSpec }}</a>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 0;margin-top:28px;font-size:14px;font-weight:500;color:rgba(255,255,255,.85)">
+      <span style="padding:0 14px;border-right:1px solid rgba(255,255,255,.3)">15-minute application</span><span style="padding:0 14px;border-right:1px solid rgba(255,255,255,.3)">Funded within 24 hours</span><span style="padding:0 14px;border-right:1px solid rgba(255,255,255,.3)">Cost shown up front</span><span style="padding:0 14px" lang="es">Hablamos Español</span>
+    </div>
+  </div>
+</section>
+
+<footer style="background:rgba(11,37,69,.86);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-top:1px solid rgba(255,255,255,.12);color:#F3F5F8;padding:80px 24px {{ footerPad }}">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:40px">
+      <div style="grid-column:span 2;min-width:0;display:flex;flex-direction:column;gap:14px;font-size:14px;line-height:1.6;color:#A7B0BE">
+        <span style="display:flex;align-items:center;gap:11px;color:#fff"><svg width="44" height="44" sc-camel-view-box="0 0 40 40" aria-hidden="true" style="flex:none"><defs><linearGradient id="pc-tile" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#13426B"></stop><stop offset="1" stop-color="#0B2545"></stop></linearGradient><linearGradient id="pc-sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4C95D"></stop><stop offset="1" stop-color="#E8634A"></stop></linearGradient><clipPath id="pc-hz"><rect x="0" y="0" width="40" height="27"></rect></clipPath></defs><rect width="40" height="40" rx="10" fill="url(#pc-tile)"></rect><rect x=".5" y=".5" width="39" height="39" rx="9.5" fill="none" stroke="#fff" stroke-opacity=".14"></rect><circle cx="20" cy="27" r="7.5" fill="url(#pc-sun)" clip-path="url(#pc-hz)"></circle><path d="M6.5 27 A13.5 13.5 0 0 1 33.5 27" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M4 27H36" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M10.5 27v6M29.5 27v6" stroke="#fff" stroke-width="2.6" stroke-linecap="round"></path><path d="M15 31.5h10" stroke="#7DD3C0" stroke-width="1.6" stroke-linecap="round" opacity=".9"></path></svg><span style="display:flex;flex-direction:column;line-height:1"><span style="font-family:'DM Serif Display',serif;font-size:25px;letter-spacing:-.01em;white-space:nowrap">Puente</span><span style="font:600 9.5px Inter,sans-serif;letter-spacing:.32em;margin-top:3px;color:#F4C95D;white-space:nowrap">CAPITAL</span></span></span>
+        <span style="color:#F3F5F8;font-size:15px">The bridge between the work you've won and the cash to do it.</span>
+        <span>[Street address], Miami, FL<br>(305) 555-0142 · Mon–Fri 8–7</span>
+        <span style="font-size:13px">Facebook · Instagram · LinkedIn · YouTube · TikTok</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><span style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:#A7B0BE;margin-bottom:4px">Funding</span><a href="#how" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">How It Works</a><a href="#calculator" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Cost Calculator</a><a href="#faq" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Funding Options</a><a href="#apply" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Apply Now</a></div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><span style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:#A7B0BE;margin-bottom:4px">Industries</span><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">HVAC &amp; Trades</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Restaurants</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Construction</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Retail</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Landscaping</a></div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><span style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:#A7B0BE;margin-bottom:4px">Company</span><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">About Us</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Our Team</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Contact</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Partners &amp; Referrals</a></div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><span style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:#A7B0BE;margin-bottom:4px">Legal</span><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Privacy Policy</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Terms of Use</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Disclosures</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">SMS Terms</a><a href="#" style="color:#F3F5F8;text-decoration:none" style-hover="color:#F4C95D">Accessibility</a></div>
+    </div>
+    <p style="margin:56px 0 0;padding-top:24px;border-top:1px solid #1E3350;font-size:12px;line-height:1.6;color:#A7B0BE">© 2026 Puente Capital · [Legal entity name]. [Disclosure text from counsel: what the product is and isn't, that approval isn't guaranteed, that terms vary by business, and state availability.] *Soft-pull claim pending legal confirmation.</p>
+  </div>
+</footer>
+
+<sc-if value="{{ appOpen }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-label="Quick application" style="position:fixed;inset:0;z-index:2000;background:rgba(11,37,69,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;padding:{{ modalPad }}">
+    <div style="background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);width:100%;max-width:640px;max-height:100%;overflow:auto;border-radius:{{ modalRadius }};box-shadow:0 30px 80px rgba(0,0,0,.35);display:flex;flex-direction:column;box-sizing:border-box">
+      <div style="position:sticky;top:0;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);z-index:1;padding:20px 24px 0;border-bottom:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px">
+          <div><div style="font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)">{{ stepLabel }}</div><div style="font-size:20px;font-weight:600;margin-top:4px">{{ stepTitle }}</div></div>
+          <button sc-camel-on-click="{{ closeApp }}" aria-label="Close" style="width:48px;height:48px;border:1px solid var(--border);border-radius:14px;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);cursor:pointer;font-size:24px;color:var(--text);flex:none">×</button>
+        </div>
+        <div style="height:4px;background:var(--glass-weak);margin:18px -24px 0"><div style="height:100%;width:{{ progress }};background:linear-gradient(90deg,#0E7C86,#14B8A6,#F4C95D);transition:width 300ms"></div></div>
+      </div>
+
+      <div style="padding:24px;display:flex;flex-direction:column;gap:18px">
+        <sc-if value="{{ appStep1 }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">First and last name<input value="{{ fName }}" sc-camel-on-change="{{ onName }}" autocomplete="name" style="height:52px;border:1px solid {{ nameBorder }};border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"><sc-if value="{{ nameErr }}" hint-placeholder-val="{{ false }}"><span style="color:#DC2626;font-weight:500;font-size:13px">Please tell us your name.</span></sc-if></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Mobile phone<input type="tel" value="{{ fPhone }}" sc-camel-on-change="{{ onPhone }}" autocomplete="tel" placeholder="(305) 555-0100" style="height:52px;border:1px solid {{ phoneBorder }};border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"><sc-if value="{{ phoneErr }}" hint-placeholder-val="{{ false }}"><span style="color:#DC2626;font-weight:500;font-size:13px">Enter a 10-digit mobile number.</span></sc-if></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Email<input type="email" autocomplete="email" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Business name<input autocomplete="organization" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Amount needed<input inputmode="numeric" value="{{ amountDisplay }}" sc-camel-on-change="{{ onAmountText }}" sc-camel-on-blur="{{ clampAmount }}" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:600 16px Inter,sans-serif;font-variant-numeric:tabular-nums" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Time in business<sc-raw-select style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 12px;font:16px Inter,sans-serif;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%)"><option>Less than 6 months</option><option>6–12 months</option><option>1–2 years</option><option>2–5 years</option><option selected="selected">5+ years</option></sc-raw-select></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Average monthly deposits<sc-raw-select style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 12px;font:16px Inter,sans-serif;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%)"><option>Under $10,000</option><option>$10,000–$25,000</option><option>$25,000–$50,000</option><option selected="selected">$50,000–$100,000</option><option>$100,000+</option></sc-raw-select></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Industry<sc-raw-select style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 12px;font:16px Inter,sans-serif;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%)"><option>HVAC &amp; Trades</option><option>Restaurant</option><option>Construction</option><option>Retail</option><option>Landscaping</option><option>Auto Repair</option><option>Other</option></sc-raw-select></label>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px"><span style="font-size:14px;font-weight:600">What's the money for?</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ uses }}" as="u" hint-placeholder-count="6">
+                <button sc-camel-on-click="{{ u.toggle }}" aria-pressed="{{ u.on }}" style="min-height:44px;padding:0 16px;border-radius:999px;cursor:pointer;font:500 15px Inter,sans-serif;border:1px solid {{ u.border }};background:{{ u.bg }};color:{{ u.color }}">{{ u.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <label style="display:flex;gap:12px;align-items:flex-start;font-size:13px;line-height:1.5;color:var(--muted);cursor:pointer"><input type="checkbox" checked="{{ fConsent }}" sc-camel-on-change="{{ onConsent }}" style="width:22px;height:22px;flex:none;margin:0;accent-color:var(--link)"><span>By checking this box, I agree that Puente Capital may contact me by call or text at the number above, including by automated means. Consent is not required to apply. Msg &amp; data rates may apply. [Final TCPA text from counsel.]</span></label>
+          <sc-if value="{{ consentErr }}" hint-placeholder-val="{{ false }}"><span style="color:#DC2626;font-weight:500;font-size:13px;margin-top:-8px">Please check the box so your specialist can reach you.</span></sc-if>
+        </sc-if>
+
+        <sc-if value="{{ appStep2 }}" hint-placeholder-val="{{ false }}">
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;grid-column:1/-1">Legal entity name<input placeholder="Méndez Air &amp; Cooling LLC" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">EIN<input inputmode="numeric" placeholder="12-3456789" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Ownership %<input inputmode="numeric" placeholder="100" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;grid-column:1/-1">Business address<input autocomplete="street-address" style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 14px;font:16px Inter,sans-serif" style-focus="outline:none;box-shadow:0 0 0 2px #0E7C86"></label>
+            <label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">State<sc-raw-select style="height:52px;border:1px solid var(--input-border);border-radius:12px;padding:0 12px;font:16px Inter,sans-serif;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%)"><option selected="selected">Florida</option><option>Georgia</option><option>Puerto Rico</option><option>Texas</option><option>Other</option></sc-raw-select></label>
+          </div>
+          <p style="margin:0;font-size:13px;color:var(--muted)">Your progress is saved. We'll text you a link to pick up where you left off.</p>
+        </sc-if>
+
+        <sc-if value="{{ appStep3 }}" hint-placeholder-val="{{ false }}">
+          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--muted)">Choose one. We only need your last 3 months.</p>
+          <button sc-camel-on-click="{{ pickConnect }}" style="text-align:left;padding:20px;border-radius:24px;cursor:pointer;border:2px solid {{ connectBorder }};background:{{ connectBg }};font:16px Inter,sans-serif;color:var(--text);display:flex;flex-direction:column;gap:4px"><strong style="font-size:17px">Connect your bank (read-only)</strong><span style="color:var(--muted);font-size:14px">Fastest. We can see deposits but can never move money.</span></button>
+          <label style="position:relative;padding:28px 20px;border-radius:24px;cursor:pointer;border:2px dashed {{ uploadBorder }};background:{{ uploadBg }};display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center">
+            <svg width="32" height="32" sc-camel-view-box="0 0 24 24" fill="none" stroke="#0E7C86" stroke-width="1.6"><path d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"></path></svg>
+            <strong style="font-size:17px">Upload statements</strong><span style="color:var(--muted);font-size:14px">{{ uploadText }}</span>
+            <input type="file" multiple="multiple" accept="application/pdf,image/*" capture="environment" sc-camel-on-change="{{ onFiles }}" style="position:absolute;width:1px;height:1px;opacity:0">
+          </label>
+        </sc-if>
+
+        <sc-if value="{{ appSubmitting }}" hint-placeholder-val="{{ false }}">
+          <div aria-live="polite" style="padding:48px 0;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center">
+            <div style="width:100%;max-width:320px;height:6px;border-radius:3px;background:linear-gradient(90deg,#0B2545,#0E7C86,#14B8A6,#F4C95D,#E8634A,#0B2545);background-size:200% 100%;background-position:{{ pulsePos }};transition:background-position 1.2s linear"></div>
+            <div style="font-size:18px;font-weight:600">{{ reviewMsg }}</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ appDone }}" hint-placeholder-val="{{ false }}">
+          <div aria-live="polite" style="padding:24px 0 8px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center">
+            <svg width="88" height="88" sc-camel-view-box="0 0 88 88" fill="none"><circle cx="44" cy="44" r="40" stroke="#14B8A6" stroke-width="4"></circle><path d="M26 45l12 12 24-26" stroke="#16A34A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="60" stroke-dashoffset="{{ checkOffset }}" style="transition:stroke-dashoffset 400ms ease-out"></path></svg>
+            <h3 style="font-family:'DM Serif Display',serif;font-weight:400;font-size:32px;margin:0">You're in, {{ firstName }}.</h3>
+            <p style="margin:0;font-size:17px;line-height:1.6;max-width:440px">Marisol, your funding specialist, will call you from <strong>(305) 555-0142</strong> within 30 minutes during business hours, in English or Spanish.</p>
+            <div style="background:var(--glass-weak);border-radius:14px;padding:14px 18px;font-size:15px;font-variant-numeric:tabular-nums">Requested: <strong>{{ amountDisplay }}</strong> · Est. cost at {{ points }} pts: <strong>{{ cost }}</strong></div>
+            <p style="margin:0;font-size:12px;color:var(--muted)">Example confirmation. Specialist name and response time are placeholders.</p>
+          </div>
+        </sc-if>
+      </div>
+
+      <sc-if value="{{ showFooter }}" hint-placeholder-val="{{ true }}">
+        <div style="position:sticky;bottom:0;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border-top:1px solid var(--border);padding:16px 24px;display:flex;gap:12px;justify-content:space-between;align-items:center">
+          <button sc-camel-on-click="{{ backStep }}" style="min-height:52px;padding:0 20px;border:none;background:none;cursor:pointer;font:600 16px Inter,sans-serif;color:var(--link);visibility:{{ backVis }}">Back</button>
+          <button sc-camel-on-click="{{ nextStep }}" style="min-height:56px;padding:0 32px;border:none;border-radius:14px;cursor:pointer;font:600 18px Inter,sans-serif;background:#E8634A;color:#fff;transition:all 150ms" style-hover="background:#F59E5B;transform:translateY(-2px)">{{ nextLabel }}</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ appDone }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:0 24px 24px;display:flex;justify-content:center"><button sc-camel-on-click="{{ closeApp }}" style="min-height:52px;padding:0 28px;border:2px solid #0E7C86;border-radius:14px;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);cursor:pointer;font:600 16px Inter,sans-serif;color:var(--link)">Back to the page</button></div>
+      </sc-if>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ mobile }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;z-index:999;background:var(--glass-strong);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);border-top:1px solid var(--border);padding:10px 12px;display:flex;gap:10px;box-shadow:0 -6px 20px rgba(11,37,69,.12)">
+    <a href="tel:+13055550142" style="flex:1;height:52px;display:flex;align-items:center;justify-content:center;border:2px solid #0E7C86;color:var(--link);border-radius:14px;text-decoration:none;font-weight:600;font-size:16px;box-sizing:border-box">{{ t.callNow }}</a>
+    <a href="#apply" style="flex:1;height:52px;display:flex;align-items:center;justify-content:center;background:#E8634A;color:#fff;border-radius:14px;text-decoration:none;font-weight:600;font-size:18px">{{ t.getFunded }}</a>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;headline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Slammed With Work. Broke on Friday.&quot;,&quot;Your Bank Said No. Your Busy Season Can't Wait.&quot;,&quot;You Don't Have a Business Problem. You Have a Timing Problem.&quot;,&quot;Make Payroll. Take the Big Job. Keep Your Crew.&quot;],&quot;default&quot;:&quot;Slammed With Work. Broke on Friday.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;A/B tests&quot;},&quot;primaryCta&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;See How Much I Qualify For&quot;,&quot;Get Funded in 24 Hours&quot;],&quot;default&quot;:&quot;See How Much I Qualify For&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;A/B tests&quot;}}">
+class Component extends DCLogic {
+  state = { amount: 30000, points: 9, job: 38000, margin: 29, tab: 'a', step: 0, scrolled: false, w: 1200, faq: 0, menu: false,
+    lang: 'en', app: 0, tried: false, name: '', phone: '', consent: false, uses: ['Take on a Job'], bank: '', files: 0, msg: 0, drawn: false };
+  applyTheme() {
+    const t = this.state.theme || 'system';
+    const dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  }
+  setTheme(t) { this.setState({ theme: t }, () => this.applyTheme()); try { localStorage.setItem('puente-theme', t); } catch (e) {} }
+  setLang(l) { this.setState({ lang: l }); try { localStorage.setItem('puente-lang', l); } catch (e) {} document.documentElement.lang = l; }
+  openApp() { this.setState({ app: 1, tried: false, menu: false }); document.body.style.overflow = 'hidden'; }
+  closeApp() { this.setState({ app: 0 }); document.body.style.overflow = ''; clearInterval(this.rv); }
+  next() {
+    const s = this.state;
+    if (s.app === 1) {
+      const ok = s.name.trim() && s.phone.replace(/\D/g, '').length >= 10 && s.consent;
+      if (!ok) return this.setState({ tried: true });
+    }
+    if (s.app < 3) return this.setState({ app: s.app + 1, tried: false });
+    this.setState({ app: 4, msg: 0 });
+    let n = 0;
+    this.rv = setInterval(() => {
+      n++;
+      if (n < 4) this.setState({ msg: n });
+      else { clearInterval(this.rv); this.setState({ app: 5, drawn: false }); setTimeout(() => this.setState({ drawn: true }), 60); }
+    }, 1100);
+  }
+  componentDidMount() {
+    let th = 'system'; try { const v = localStorage.getItem('puente-theme'); if (['light', 'dark', 'system'].includes(v)) th = v; } catch (e) {}
+    this.setState({ theme: th }, () => this.applyTheme());
+    this.mq = window.matchMedia('(prefers-color-scheme: dark)');
+    this.onMq = () => this.applyTheme();
+    this.mq.addEventListener && this.mq.addEventListener('change', this.onMq);
+    try { const l = localStorage.getItem('puente-lang'); if (l === 'es' || l === 'en') this.setLang(l); } catch (e) {}
+    this.onDocClick = e => { const a = e.target.closest && e.target.closest('a[href="#apply"]'); if (a) { e.preventDefault(); this.openApp(); } };
+    document.addEventListener('click', this.onDocClick);
+    this.onScroll = () => { const s = window.scrollY > 80; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onResize);
+    this.onResize();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ step: 4 });
+    else this.t = setInterval(() => this.setState(s => ({ step: (s.step + 1) % 7 })), 1800);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onResize);
+    clearInterval(this.t); clearInterval(this.rv);
+    document.removeEventListener('click', this.onDocClick);
+    this.mq && this.mq.removeEventListener && this.mq.removeEventListener('change', this.onMq);
+  }
+  renderVals() {
+    const s = this.state;
+    const fmt = n => (n < 0 ? '-$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US');
+    const num = e => parseInt(String(e.target.value).replace(/[^0-9]/g, ''), 10) || 0;
+    const cost = Math.round(s.amount * s.points / 100);
+    const jobProfit = Math.round(s.job * s.margin / 100);
+    const net = jobProfit - cost;
+    const mobile = s.w < 768;
+    const steps = ['Approved', 'Signed', 'Wired'];
+    const timeline = steps.map((label, i) => {
+      const done = s.step >= i + 1;
+      return { label, bg: done ? '#14B8A6' : 'transparent', border: done ? '#14B8A6' : 'rgba(255,255,255,.4)', check: done ? 1 : 0, op: done ? 1 : 0.55, weight: done ? 600 : 400 };
+    });
+    const faqData = [
+      ["What are 'points'?", 'Points are the cost of the advance as a percentage of the amount. On a $30,000 advance, 9 points is $2,700.'],
+      ['Can I get funded with bad credit?', 'We look at your whole business, including deposits and time in business. Credit is one factor, not the only one. Approval isn\u2019t guaranteed.'],
+      ['How fast will I really get the money?', 'Once you\u2019re approved and sign, funds are typically wired within 24 hours.'],
+      ['How do I pay it back?', 'Your payment amount and schedule are spelled out in your written agreement before you sign.'],
+      ['Is this a loan?', '[Answer to be written by counsel based on the actual contract structure.]'],
+      ['Do you work with businesses outside South Florida?', 'Yes. We fund small businesses across the U.S. and U.S. territories.']
+    ];
+    const tabOn = { bg: 'var(--glass-strong)', color: 'var(--heading)', line: 'inset 0 -3px 0 #E8634A' };
+    const tabOff = { bg: 'transparent', color: 'var(--muted)', line: 'none' };
+    const A = s.tab === 'a' ? tabOn : tabOff, B = s.tab === 'b' ? tabOn : tabOff;
+    const es = s.lang === 'es';
+    const HL = {
+      'Slammed With Work. Broke on Friday.': 'Lleno de trabajo. Sin dinero el viernes.',
+      "Your Bank Said No. Your Busy Season Can't Wait.": 'El banco le dijo que no. Su temporada no puede esperar.',
+      "You Don't Have a Business Problem. You Have a Timing Problem.": 'Su negocio no tiene un problema. Tiene un problema de tiempo.',
+      'Make Payroll. Take the Big Job. Keep Your Crew.': 'Pague la nómina. Acepte el trabajo grande. Mantenga a su equipo.'
+    };
+    const CT = { 'See How Much I Qualify For': 'Vea cuánto puede recibir', 'Get Funded in 24 Hours': 'Reciba fondos en 24 horas' };
+    const hl = this.props.headline ?? 'Slammed With Work. Broke on Friday.';
+    const pc = this.props.primaryCta ?? 'See How Much I Qualify For';
+    const EN = { nav1: 'How It Works', nav2: 'Industries', nav3: 'Cost Calculator', nav4: 'FAQ', nav5: 'About', getFunded: 'Get Funded', callNow: 'Call Now',
+      badge: 'Funds wired within 24 hours · $2K–$150K', sub: 'Get $2,000 to $150,000 wired to your business account within 24 hours. One clear cost, no mountain of paperwork, and we look at your business, not just your credit score.',
+      tr1: 'Funded within 24 hours', tr2: 'One flat cost, shown up front', tr3: '3 months of bank statements, not 3 years of tax returns', talk: 'Talk to a Real Person',
+      micro: "Checking won't affect your credit score* · 15-minute application · Real humans, in English or Spanish",
+      painH: 'Got the Work but Not the Cash to Do It?', painP: "The phones won't stop ringing. The supplier wants payment up front. The customer pays net-45. And payroll is due Friday. You're not doing anything wrong. The money just shows up after the bills do.",
+      familiar: "Sound familiar? There's a faster way, and most banks won't tell you about it.", timingH: "You Don't Have a Business Problem. You Have a Timing Problem.",
+      stepsH: 'Funded in 3 Simple Steps', calcH: 'What Will It Really Cost? See It in Dollars.', calcSub: 'Move the sliders. No email required to see your numbers.',
+      tabA: 'My Advance Cost', tabB: 'Is This Job Worth It?', getOffer: 'Get My Real Offer', storiesH: 'South Florida Owners Who Stopped Waiting on the Bank',
+      optionsH: 'Simple Funding. Clear Cost. No Surprises.', legitH: 'A Real Company. Real People. Right Here in South Florida.', secureH: 'Your Information Is Protected',
+      videoH: 'Meet Your Funding Team (2 Minutes)', finalH: "Payroll's Friday. The Job Won't Wait. Neither Should You.",
+      finalP: "Find out what you qualify for in about 15 minutes. If you're approved and sign, the money can be in your account within 24 hours.", getFundedNow: 'Get Funded Now', callSpec: 'Call a Funding Specialist' };
+    const ES = { nav1: 'Cómo funciona', nav2: 'Industrias', nav3: 'Calculadora', nav4: 'Preguntas', nav5: 'Nosotros', getFunded: 'Obtenga fondos', callNow: 'Llamar',
+      badge: 'Fondos transferidos en 24 horas · $2K–$150K', sub: 'Reciba de $2,000 a $150,000 en la cuenta de su negocio en 24 horas. Un solo costo claro, sin montañas de papeleo, y miramos su negocio, no solo su puntaje de crédito.',
+      tr1: 'Fondos en 24 horas', tr2: 'Un costo fijo, mostrado por adelantado', tr3: '3 meses de estados de cuenta, no 3 años de declaraciones de impuestos', talk: 'Hable con una persona real',
+      micro: 'Verificar no afecta su puntaje de crédito* · Solicitud de 15 minutos · Personas reales, en inglés o español',
+      painH: '¿Tiene el trabajo pero no el efectivo para hacerlo?', painP: 'Los teléfonos no paran de sonar. El proveedor quiere el pago por adelantado. El cliente paga a 45 días. Y la nómina es el viernes. Usted no está haciendo nada mal. El dinero simplemente llega después que las cuentas.',
+      familiar: '¿Le suena conocido? Hay una forma más rápida, y la mayoría de los bancos no se la van a decir.', timingH: HL["You Don't Have a Business Problem. You Have a Timing Problem."],
+      stepsH: 'Fondos en 3 pasos simples', calcH: '¿Cuánto cuesta de verdad? Véalo en dólares.', calcSub: 'Mueva los controles. No necesita dar su correo para ver sus números.',
+      tabA: 'El costo de mi adelanto', tabB: '¿Vale la pena este trabajo?', getOffer: 'Obtener mi oferta real', storiesH: 'Dueños del sur de Florida que dejaron de esperar al banco',
+      optionsH: 'Financiamiento simple. Costo claro. Sin sorpresas.', legitH: 'Una empresa real. Gente real. Aquí mismo en el sur de Florida.', secureH: 'Su información está protegida',
+      videoH: 'Conozca a su equipo de financiamiento (2 minutos)', finalH: 'La nómina es el viernes. El trabajo no espera. Usted tampoco debería.',
+      finalP: 'Sepa cuánto puede recibir en unos 15 minutos. Si lo aprueban y firma, el dinero puede estar en su cuenta en 24 horas.', getFundedNow: 'Obtenga su financiamiento', callSpec: 'Llame a un especialista' };
+    const phoneOk = s.phone.replace(/\D/g, '').length >= 10;
+    const titles = ['', 'Quick start', 'Business details', 'Verify your deposits', 'Reviewing', 'Submitted'];
+    const msgs = ['Securing your information…', 'Reviewing your details…', 'Matching you with a specialist…', 'Almost there…'];
+    const useList = ['Payroll', 'Equipment/Inventory', 'Take on a Job', 'Repairs', 'Expansion', 'Other'];
+    return {
+      imgs: Object.fromEntries(Object.entries({"img0":"https://images.unsplash.com/photo-1705579605238-24a90c8799c5?auto=format&fit=crop&w=1600&q=70","img1":"https://images.unsplash.com/photo-1770625467384-304e461ef1be?auto=format&fit=crop&w=1600&q=70","img2":"https://images.unsplash.com/photo-1642749776312-aa42ce20c9f5?auto=format&fit=crop&w=1600&q=70","img3":"https://images.unsplash.com/photo-1758873268528-af4613d099b6?auto=format&fit=crop&w=1600&q=70","img4":"https://images.unsplash.com/photo-1758101755915-462eddc23f57?auto=format&fit=crop&w=1600&q=70","img5":"https://images.unsplash.com/photo-1603714228681-b399854b8f80?auto=format&fit=crop&w=1600&q=70"}).map(([k, u]) => [k, (window.__resources && window.__resources[k]) || u])),
+      t: es ? ES : EN,
+      themes: [
+        ['light', es ? 'Claro' : 'Light', 'M12 3v1.5M12 19.5V21M4.6 4.6l1.1 1.1M18.3 18.3l1.1 1.1M3 12h1.5M19.5 12H21M4.6 19.4l1.1-1.1M18.3 5.7l1.1-1.1M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z'],
+        ['dark', es ? 'Oscuro' : 'Dark', 'M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z'],
+        ['system', es ? 'Sistema' : 'System', 'M3 5.5A1.5 1.5 0 0 1 4.5 4h15A1.5 1.5 0 0 1 21 5.5v9a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 14.5v-9ZM8 20h8M12 16v4']
+      ].map(([k, label, icon]) => { const on = (s.theme || 'system') === k; return { label, icon, on, bg: on ? '#fff' : 'transparent', color: on ? '#0B2545' : '#fff', pick: () => this.setTheme(k) }; }),
+      headline: es ? (HL[hl] || hl) : hl,
+      primaryCta: es ? (CT[pc] || pc) : pc,
+      setEn: () => this.setLang('en'), setEs: () => this.setLang('es'),
+      enBg: es ? 'transparent' : '#fff', enColor: es ? '#fff' : '#0B2545', esBg: es ? '#fff' : 'transparent', esColor: es ? '#0B2545' : '#fff',
+      appOpen: s.app > 0, appStep1: s.app === 1, appStep2: s.app === 2, appStep3: s.app === 3, appSubmitting: s.app === 4, appDone: s.app === 5,
+      showFooter: s.app >= 1 && s.app <= 3,
+      stepLabel: s.app <= 3 ? 'Step ' + s.app + ' of 3' : (s.app === 4 ? 'One moment' : 'Done'),
+      stepTitle: titles[s.app] || '',
+      progress: (s.app >= 5 ? 100 : s.app >= 4 ? 90 : s.app * 30) + '%',
+      modalPad: mobile ? '0' : '24px', modalRadius: mobile ? '0' : '16px',
+      closeApp: () => this.closeApp(), nextStep: () => this.next(), backStep: () => this.setState(p => ({ app: Math.max(1, p.app - 1) })),
+      backVis: s.app > 1 ? 'visible' : 'hidden', nextLabel: s.app === 3 ? 'Submit application' : 'Continue',
+      fName: s.name, fPhone: s.phone, fConsent: s.consent,
+      onName: e => this.setState({ name: e.target.value }), onPhone: e => this.setState({ phone: e.target.value }), onConsent: e => this.setState({ consent: e.target.checked }),
+      nameErr: s.tried && !s.name.trim(), phoneErr: s.tried && !phoneOk, consentErr: s.tried && !s.consent,
+      nameBorder: s.tried && !s.name.trim() ? '#DC2626' : '#D1D5DB', phoneBorder: s.tried && !phoneOk ? '#DC2626' : '#D1D5DB',
+      uses: useList.map(label => { const on = s.uses.includes(label); return { label, on, bg: on ? '#0E7C86' : 'var(--glass-weak)', color: on ? '#fff' : 'var(--text)', border: on ? '#0E7C86' : 'var(--input-border)',
+        toggle: () => this.setState(p => ({ uses: p.uses.includes(label) ? p.uses.filter(x => x !== label) : [...p.uses, label] })) }; }),
+      pickConnect: () => this.setState({ bank: 'connect' }),
+      connectBorder: s.bank === 'connect' ? '#0E7C86' : 'var(--border)', connectBg: s.bank === 'connect' ? 'var(--tint)' : 'var(--glass-weak)',
+      uploadBorder: s.bank === 'upload' ? '#0E7C86' : 'var(--input-border)', uploadBg: s.bank === 'upload' ? 'var(--tint)' : 'var(--glass-weak)',
+      uploadText: s.files ? s.files + ' file' + (s.files > 1 ? 's' : '') + ' ready' : 'PDF or photo. Tap to use your camera.',
+      onFiles: e => this.setState({ bank: 'upload', files: e.target.files.length }),
+      reviewMsg: msgs[s.msg] || msgs[3], pulsePos: (s.msg * 50) + '% 0',
+      checkOffset: s.drawn ? 0 : 60, firstName: (s.name.trim().split(' ')[0]) || 'Charlie',
+      desktop: s.w >= 1180, compact: s.w < 1180, tablet: s.w >= 768 && s.w < 1180, mobile, menuOpen: s.w < 1180 && s.menu,
+      toggleMenu: () => this.setState(p => ({ menu: !p.menu })),
+      navBg: s.scrolled ? 'rgba(11,37,69,.55)' : 'transparent', navLine: s.scrolled ? 'rgba(255,255,255,.14)' : 'transparent',
+      navH: s.scrolled ? '64px' : (mobile ? '60px' : '72px'),
+      footerPad: mobile ? '112px' : '40px',
+      timeline,
+      notifOpacity: s.step >= 3 ? 1 : 0,
+      notifTransform: s.step >= 3 ? 'translateY(0)' : 'translateY(-16px)',
+      isA: s.tab === 'a', isB: s.tab === 'b',
+      setTabA: () => this.setState({ tab: 'a' }), setTabB: () => this.setState({ tab: 'b' }),
+      tabABg: A.bg, tabAColor: A.color, tabALine: A.line, tabBBg: B.bg, tabBColor: B.color, tabBLine: B.line,
+      amount: s.amount, points: s.points, margin: s.margin,
+      amountDisplay: fmt(s.amount), jobDisplay: fmt(s.job),
+      onAmount: e => this.setState({ amount: num(e) }),
+      onAmountText: e => this.setState({ amount: Math.min(150000, num(e)) }),
+      clampAmount: () => this.setState(p => ({ amount: Math.max(2000, p.amount) })),
+      onPoints: e => this.setState({ points: num(e) }),
+      onMargin: e => this.setState({ margin: num(e) }),
+      onJob: e => this.setState({ job: Math.min(10000000, num(e)) }),
+      cost: fmt(cost), payback: fmt(s.amount + cost),
+      jobProfit: fmt(jobProfit), net: fmt(net),
+      multiple: cost > 0 ? (jobProfit / cost).toFixed(1) + 'x' : '—',
+      netColor: net > 0 ? 'var(--link)' : '#D97706',
+      takeWidth: net > 0 ? '100%' : '2%',
+      notWorth: net <= 0,
+      faqs: faqData.map(([q, a], i) => ({ q, a, open: s.faq === i, icon: s.faq === i ? '−' : '+', toggle: () => this.setState(p => ({ faq: p.faq === i ? -1 : i })) }))
+    };
+  }
+}
+</script>
+
+
+</body></html>
