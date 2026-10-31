@@ -18,7 +18,7 @@ product divided by the product of their norms (≈ 127² since rows are normaliz
 ```bash
 pip install gensim numpy
 python3 w2v-training/train.py      # downloads text8 to ~/.cache/w2v-text8 on first run
-# options: --epochs 10 --negative 10 --min-count 5 --top 20000 --out-dir assets/w2v
+# options: --epochs 5 --negative 10 --min-count 5 --top 20000 --out-dir assets/w2v
 ```
 
 The corpus is fetched from the gensim-data GitHub release

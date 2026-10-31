@@ -3,7 +3,7 @@
 for the in-browser demo (assets/w2v/{vocab.json,vectors.bin,meta.json}).
 
 Usage:
-    python3 w2v-training/train.py [--data-dir DIR] [--out-dir assets/w2v] [--epochs 5]
+    python3 w2v-training/train.py [--data-dir DIR] [--out-dir assets/w2v] [--epochs 10]
 
 Requires: gensim>=4, numpy.  text8 (~31 MB gz, 100 MB raw, ~17M tokens of
 cleaned English Wikipedia, March 2006) is downloaded into --data-dir if missing.
@@ -43,7 +43,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data-dir", default=os.path.expanduser("~/.cache/w2v-text8"))  # outside the repo
     ap.add_argument("--out-dir", default=os.path.join(here, "..", "assets", "w2v"))
-    ap.add_argument("--epochs", type=int, default=5)
+    ap.add_argument("--epochs", type=int, default=10)
     ap.add_argument("--min-count", type=int, default=5)
     ap.add_argument("--negative", type=int, default=10)
     ap.add_argument("--top", type=int, default=20000)

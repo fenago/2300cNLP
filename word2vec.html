@@ -86,8 +86,10 @@ a{color:var(--link)}a:hover{color:var(--heading)}
 .chip:hover{background:rgba(255,255,255,.24);transform:translateY(-1px)}
 .chip.light{border-color:var(--input-border);background:var(--glass-weak);color:var(--text)}
 .chip.light:hover{background:var(--tint)}
-.status{margin-top:22px;font-size:14px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:22px}
-.progress{width:180px;height:6px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden}
+.status{margin-top:22px;font-size:14px;line-height:1.45;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:10px 12px;min-height:22px}
+.status>span{min-width:0}
+.status .linkbtn{background:none;border:0;padding:0;color:#F4C95D;font:600 14px Inter,sans-serif;text-decoration:underline;cursor:pointer;white-space:nowrap}
+.progress{flex:0 1 180px;min-width:60px;height:6px;border-radius:99px;background:rgba(255,255,255,.2);overflow:hidden}
 .progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#14B8A6,#F4C95D);transition:width 120ms}
 .dot{width:8px;height:8px;border-radius:50%;background:#7DD3C0;flex:none}
 
@@ -171,7 +173,7 @@ main{padding:clamp(40px,6vw,72px) 24px clamp(64px,8vw,100px)}
 .explain{margin-top:clamp(64px,8vw,100px)}
 .sec-h{font-size:clamp(30px,3.6vw,40px);margin:10px 0 12px;text-align:center}
 .sec-sub{text-align:center;color:var(--muted);font-size:17px;line-height:1.6;max-width:680px;margin:0 auto 40px}
-.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:24px}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:24px}
 .ex-grid .card{display:flex;flex-direction:column;gap:12px}
 .ex-grid h3{font-size:20px;font-weight:600;margin:0;color:var(--heading)}
 .ex-grid p{font-size:15.5px;line-height:1.65;color:var(--muted);margin:0}
@@ -185,6 +187,8 @@ main{padding:clamp(40px,6vw,72px) 24px clamp(64px,8vw,100px)}
 .params span{font-size:12.5px;background:var(--tint);border-radius:999px;padding:5px 10px;color:var(--text)}
 .formula{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13.5px;background:var(--glass-weak);border:1px solid var(--border);border-radius:12px;padding:10px 12px;color:var(--text);overflow-x:auto}
 footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted)}
+[hidden]{display:none!important}
+.card,.plotbox,section{scroll-margin-top:84px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media (max-width:600px){
   .hero{padding:96px 16px 40px}
@@ -222,7 +226,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
       </div>
       <button class="btn" type="submit" id="go" disabled>Explore</button>
     </form>
-    <div class="chips" id="examples"><span class="lbl">Try:</span></div>
+    <div class="chips" id="examples" hidden><span class="lbl">Try:</span></div>
     <div class="status" id="status" aria-live="polite"><span>Loading model…</span><span class="progress"><i id="prog"></i></span><span id="progTxt"></span></div>
   </div>
 </section>
@@ -267,7 +271,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
             <button class="tool" type="button" id="reset" title="Reset view">Reset</button>
           </div>
         </div>
-        <div class="legend"><span><i style="background:#E8634A"></i>query word</span><span><i style="background:var(--pt-neighbor)"></i>top 10 neighbors</span><span id="var3d"></span></div>
+        <div class="legend"><span><i style="background:#E8634A"></i>query word</span><span><i style="background:var(--pt-neighbor)"></i>top 10 neighbors</span><span id="lgExt3" hidden><i style="background:var(--pt-ext)"></i>neighbors of neighbors</span><span id="var3d"></span></div>
       </section>
 
       <section class="card" aria-labelledby="anaH">
@@ -405,7 +409,9 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     // so a retrained model is not stuck behind long-lived /assets/* caching.
     fetchJSON(BASE + 'meta.json', { cache: 'no-cache' }).then(function (meta) {
       M.meta = meta;
-      var v = '?v=' + encodeURIComponent(meta.trained || meta.count || '1');
+      // version key = hash of the whole meta.json, so any retrain (even same-day) busts the cache
+      var str = JSON.stringify(meta), h = 5381; for (var i = 0; i < str.length; i++) h = ((h * 33) ^ str.charCodeAt(i)) >>> 0;
+      var v = '?v=' + h.toString(36);
       setProgress(0.02, 'fetching vectors');
       return Promise.all([
         fetchJSON(BASE + 'vocab.json' + v),
@@ -449,6 +455,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     var st = $('status'); st.innerHTML = '';
     st.appendChild(el('span', { class: 'dot', style: 'background:#E8634A' }));
     st.appendChild(el('span', { text: 'The model could not be loaded.' }));
+    var rb = el('button', { class: 'linkbtn', type: 'button', text: 'Try again' }); rb.addEventListener('click', load); st.appendChild(rb);
     var box = el('div', { class: 'msg err', role: 'alert' }, [
       el('strong', { text: 'Couldn’t load the Word2Vec model.' }),
       el('div', { style: 'margin-top:6px;color:var(--muted);font-size:14px', text: (err && err.message ? err.message : String(err)) + '. Check your connection and try again.' })
@@ -467,7 +474,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     st.appendChild(el('span', { text: fmt(M.N) + ' words · ' + M.D + ' dimensions' + (meta.corpus ? ' · trained on ' + meta.corpus : '') }));
     ['q', 'go', 'aA', 'aB', 'aC', 'anaGo'].forEach(function (id) { $(id).disabled = false; });
 
-    var ex = $('examples');
+    var ex = $('examples'); ex.hidden = false;
     EXAMPLES.filter(function (w) { return M.index.has(w); }).slice(0, 8).forEach(function (w) {
       var b = el('button', { class: 'chip', type: 'button', text: w });
       b.addEventListener('click', function () { $('q').value = w; query(w, { scroll: true }); });
@@ -662,7 +669,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     var e = res.explained;
     $('var2d').textContent = 'PC1+PC2 keep ' + Math.round((e[0] + e[1]) * 100) + '% of the variation';
     $('var3d').textContent = 'PC1–3 keep ' + Math.round((e[0] + e[1] + e[2]) * 100) + '% of the variation';
-    $('lgExt').hidden = !S.ext;
+    $('lgExt').hidden = !S.ext; $('lgExt3').hidden = !S.ext;
     draw2d();
     view3d.setPoints(pts);
   }
@@ -708,42 +715,45 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     });
     svg.appendChild(lines);
 
-    // label layout with simple collision relaxation
+    // label layout: greedy placement in priority order (query, then neighbors by rank, then the rest).
+    // Each label tries positions around its dot and keeps the first one that hits no placed label,
+    // no other dot and stays inside the plot; otherwise the least-overlapping candidate wins.
     var fsz = [narrow ? 15 : 16, narrow ? 12.5 : 13.5, narrow ? 10.5 : 11.5], rad = [9, 6, 3.5];
-    var labs = pts.map(function (p) {
-      var fs = fsz[p.t], w = p.label.length * fs * 0.58 + 2, x = X(p) + rad[p.t] + 5, anchor = 'start';
-      if (x + w > W - 4) { x = X(p) - rad[p.t] - 5 - w; }
-      return { p: p, x: x, y: Y(p) + fs * 0.35, w: w, h: fs * 1.15, fs: fs, ay: Y(p) + fs * 0.35 };
-    });
-    for (var it = 0; it < 80; it++) {
-      var moved = false;
-      for (var a = 0; a < labs.length; a++) for (var b = a + 1; b < labs.length; b++) {
-        var A = labs[a], B = labs[b];
-        if (A.x < B.x + B.w && B.x < A.x + A.w && Math.abs(A.y - B.y) < (A.h + B.h) / 2) {
-          var ov = (A.h + B.h) / 2 - Math.abs(A.y - B.y) + 0.5, dir = A.y <= B.y ? -1 : 1;
-          var wa = A.p.t === 0 ? 0.15 : 0.5, wb = B.p.t === 0 ? 0.15 : 0.5;
-          A.y += dir * ov * wa; B.y -= dir * ov * wb; moved = true;
-        }
+    var boxes = [], labs = new Array(pts.length);
+    function overlap(a, b) { var w = Math.min(a.x + a.w, b.x + b.w) - Math.max(a.x, b.x), h = Math.min(a.y + a.h, b.y + b.h) - Math.max(a.y, b.y); return w > 0 && h > 0 ? w * h : 0; }
+    pts.forEach(function (p, k) {
+      var fs = fsz[p.t], w = p.label.length * fs * 0.58 + 2, h = fs * 1.2, px = X(p), py = Y(p), r = rad[p.t] + 4;
+      var cands = [[px + r, py - h / 2], [px - r - w, py - h / 2], [px - w / 2, py - r - h], [px - w / 2, py + r]];
+      for (var st = 1; st <= 4; st++) { cands.push([px + r, py - h / 2 - st * h * 0.9], [px + r, py - h / 2 + st * h * 0.9], [px - r - w, py - h / 2 - st * h * 0.9], [px - r - w, py - h / 2 + st * h * 0.9]); }
+      var best = null, bestCost = Infinity, bestC = 0;
+      for (var c = 0; c < cands.length; c++) {
+        var b = { x: cands[c][0], y: cands[c][1], w: w, h: h }, cost = c * 0.5;
+        if (b.x < 2 || b.x + b.w > W - 2 || b.y < 2 || b.y + b.h > H - 2) cost += 1e5;
+        boxes.forEach(function (o) { cost += overlap(b, o) * 4; });
+        pts.forEach(function (q, m) { if (m === k) return; var rr = rad[q.t] + 1; cost += overlap(b, { x: X(q) - rr, y: Y(q) - rr, w: 2 * rr, h: 2 * rr }) * 3; });
+        if (cost < bestCost) { bestCost = cost; best = b; bestC = c; if (cost === c * 0.5 && c < 4) break; }
       }
-      labs.forEach(function (L) { L.y = Math.max(L.h, Math.min(H - 4, L.y)); });
-      if (!moved) break;
-    }
+      boxes.push(best);
+      labs[k] = { x: best.x, y: best.y + h * 0.78, w: w, h: h, fs: fs, far: bestC >= 4 };
+    });
 
     var order = pts.map(function (p, k) { return k; }).sort(function (a, b) { return pts[b].t - pts[a].t; });
-    var layer = sv('g', {});
+    var layer = sv('g', {}), textLayer = sv('g', {});
     order.forEach(function (k) {
       var p = pts[k], L = labs[k];
       var grp = sv('g', { class: 'pt' });
       var title = sv('title', {}); title.textContent = p.t === 0 ? p.label + ' (query)' : p.label + ' · similarity to “' + pts[p.parent].label + '”: ' + p.s.toFixed(3); grp.appendChild(title);
-      if (Math.abs(L.y - L.ay) > L.h * 0.6) grp.appendChild(sv('line', { x1: X(p), y1: Y(p), x2: L.x < X(p) ? L.x + L.w : L.x, y2: L.y - L.fs * 0.35, stroke: 'var(--muted)', 'stroke-opacity': 0.35, 'stroke-width': 0.8 }));
+      if (L.far) grp.appendChild(sv('line', { x1: X(p), y1: Y(p), x2: Math.max(L.x, Math.min(L.x + L.w, X(p))), y2: L.y - L.fs * 0.35, stroke: 'var(--muted)', 'stroke-opacity': 0.35, 'stroke-width': 0.8 }));
       grp.appendChild(sv('circle', { cx: X(p), cy: Y(p), r: rad[p.t], fill: p.t === 0 ? '#E8634A' : p.t === 1 ? 'var(--pt-neighbor)' : 'var(--pt-ext)', 'fill-opacity': p.t === 2 ? 0.7 : 1, stroke: p.t === 2 ? 'none' : 'var(--base)', 'stroke-width': 2 }));
       var tx = sv('text', { x: L.x, y: L.y, 'font-size': L.fs, 'font-weight': p.t === 0 ? 700 : p.t === 1 ? 600 : 400, fill: p.t === 0 ? '#E8634A' : p.t === 1 ? 'var(--text)' : 'var(--muted)' });
-      tx.textContent = p.label; grp.appendChild(tx);
-      grp.appendChild(sv('rect', { x: Math.min(X(p) - 10, L.x), y: Math.min(Y(p) - 10, L.y - L.h), width: Math.abs(L.x - X(p)) + L.w + 10, height: Math.max(20, L.h + 4), fill: 'transparent' }));
+      tx.textContent = p.label;
+      var tg = sv('g', { class: 'pt' }); tg.appendChild(tx); textLayer.appendChild(tg);
+      if (p.t !== 0) tg.addEventListener('click', function () { $('q').value = p.label; query(p.label); });
+      grp.appendChild(sv('circle', { cx: X(p), cy: Y(p), r: rad[p.t] + 7, fill: 'transparent' }));
       if (p.t !== 0) grp.addEventListener('click', function () { $('q').value = p.label; query(p.label); });
       layer.appendChild(grp);
     });
-    svg.appendChild(layer);
+    svg.appendChild(layer); svg.appendChild(textLayer);
     box.innerHTML = ''; box.appendChild(svg);
   }
 
@@ -772,7 +782,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     }
     function project() {
       var cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch), d = 3.2;
-      var f = Math.min(W, H) * 0.36 * zoom;
+      var f = Math.min(W, H) * 0.30 * zoom;
       function pr(x, y, z) {
         var x1 = cy * x + sy * z, z1 = -sy * x + cy * z;
         var y2 = cp * y - sp * z1, z2 = sp * y + cp * z1;
@@ -811,13 +821,13 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
       order.forEach(function (q) {
         var t = q.p.t, dep = Math.max(0, Math.min(1, (q.z + 1) / 2)), r = base[t] * q.k;
         var hov = P.indexOf(q) === hoverIdx;
-        ctx.globalAlpha = 0.35 + 0.65 * dep;
+        ctx.globalAlpha = t === 0 ? 0.65 + 0.35 * dep : 0.35 + 0.65 * dep;
         ctx.fillStyle = t === 0 ? '#E8634A' : t === 1 ? colors.nb : colors.ext;
         ctx.beginPath(); ctx.arc(q.sx, q.sy, hov ? r + 2 : r, 0, Math.PI * 2); ctx.fill();
         if (t < 2) { ctx.strokeStyle = colors.base; ctx.lineWidth = 1.5; ctx.stroke(); }
         var fs = Math.round(fsz[t] * (0.85 + 0.25 * q.k) * 10) / 10;
         ctx.font = (t === 0 ? '700 ' : t === 1 ? '600 ' : '400 ') + fs + 'px Inter, sans-serif';
-        ctx.globalAlpha = t === 2 ? 0.25 + 0.6 * dep : 0.45 + 0.55 * dep;
+        ctx.globalAlpha = t === 2 ? 0.25 + 0.6 * dep : t === 0 ? 0.75 + 0.25 * dep : 0.45 + 0.55 * dep;
         if (hov) ctx.globalAlpha = 1;
         ctx.lineWidth = 3; ctx.strokeStyle = colors.base; ctx.lineJoin = 'round';
         var lx = q.sx + r + 4, ly = q.sy + fs * 0.35;
@@ -834,7 +844,10 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
       if (dirty) { draw(); dirty = false; }
       if (auto) raf = requestAnimationFrame(frame);
     }
-    function kick() { if (!raf && visible) raf = requestAnimationFrame(frame); }
+    function kick() {
+      if (!visible) { if (dirty && W) { draw(); dirty = false; } return; } // paint once, but don't animate off-screen
+      if (!raf) raf = requestAnimationFrame(frame);
+    }
     function setAuto(on) { auto = on; var b = $('spin'); b.textContent = on ? 'Pause' : 'Spin'; b.setAttribute('aria-pressed', String(on)); kick(); }
     function stopAuto() { if (auto) setAuto(false); }
 
@@ -937,7 +950,7 @@ footer{padding:28px 24px 40px;text-align:center;font-size:13px;color:var(--muted
     if (p.window) bits.push('“Context” means up to ' + p.window + ' words on either side.');
     var mc = p.min_count || p.minCount;
     if (mc) bits.push('Words seen fewer than ' + mc + ' times were dropped, leaving ' + fmt(M.N) + ' words.');
-    if (m.trained) { var d = new Date(m.trained); bits.push('Trained ' + (isNaN(d) ? m.trained : d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })) + '.'); }
+    if (m.trained) { var dm = /^(\d{4})-(\d{2})-(\d{2})$/.exec(m.trained), d = dm ? new Date(+dm[1], dm[2] - 1, +dm[3]) : new Date(m.trained); bits.push('Trained ' + (isNaN(d) ? m.trained : d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })) + '.'); }
     bits.push('Vectors are stored as 8-bit integers to keep the download small, then re-normalized in your browser.');
     $('trainText').textContent = bits.join(' ');
     var stats = $('stats'); stats.innerHTML = '';

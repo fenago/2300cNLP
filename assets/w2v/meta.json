@@ -1,0 +1,17 @@
+{
+  "dim": 100,
+  "count": 20000,
+  "scale": 127,
+  "normalized": true,
+  "corpus": "text8 (first 100 MB of cleaned English Wikipedia, March 2006)",
+  "tokens": 17005207,
+  "params": {
+    "sg": 1,
+    "vector_size": 100,
+    "window": 5,
+    "negative": 10,
+    "epochs": 10,
+    "min_count": 5
+  },
+  "trained": "2026-10-31"
+}
